@@ -1,40 +1,9 @@
 #!/bin/bash
 
-# The default google client. Works on both the ga and fsdf domains
-GA_GOOGLE_CLIENT=client=gme-geoscienceaustralia
-
 # Should be home already but make sure.
-cd /home/ec2-user/fsdf-elvis
+cd /home/ec2-user/elvis-positioning
 
 # Update code base
 git pull
 # Copy static content to Apache
-sudo cp -rf dist/* /var/www/html
-
-# Sometimes you want to run it on a domain that does not have GA's Google client ID registered so
-# you can set the system variable GOOGLE_KEY in your .bash_profile and export it so that
-# it replace the GA key
-if [ -n "$GOOGLE_KEY" ]
-then
-  sudo rm -rf /tmp/fsdf_work
-  mkdir /tmp/fsdf_work
-  cp dist/*.html /tmp/fsdf_work
-  /bin/sed -i -e 's/'"$GA_GOOGLE_CLIENT"'/'"$GOOGLE_KEY"'/g' /tmp/fsdf_work/*.html
-  sudo cp -f /tmp/fsdf_work/*.html /var/www/html
-  sudo rm -rf /tmp/fsdf_work
-fi
-
-## We used to do the proxy configuration here but once it became shared we moved it to its own project
-# Update any proxies that might have changed
-# sudo cp -f code-deploy/proxies.conf /etc/httpd/conf.d
-# Pick up any new proxies
-# sudo service httpd restart
-
-# Stop the application
-sudo service fsdf stop
-# Update the service
-sudo cp -f code-deploy/fsdf /etc/rc.d/init.d
-# Make it executable
-sudo chmod +x /etc/rc.d/init.d/fsdf
-# Start the app, there might be new services
-sudo service fsdf start
+sudo cp -rf dist/* /var/www/positioning
