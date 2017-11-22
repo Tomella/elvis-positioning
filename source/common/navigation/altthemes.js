@@ -61,8 +61,8 @@
 		})
 
 		.factory('altthemesService', ['$q', '$http', 'storageService', function ($q, $http, storageService) {
-			var THEME_PERSIST_KEY = 'icsm.current.theme';
-			var THEMES_LOCATION = 'icsm/resources/config/themes.json';
+			var THEME_PERSIST_KEY = 'positioning.current.theme';
+			var THEMES_LOCATION = 'positioning/resources/config/themes.json';
 			var DEFAULT_THEME = "All";
 			var waiting = [];
 			var self = this;

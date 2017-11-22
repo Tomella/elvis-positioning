@@ -1,61 +1,32 @@
-.wizardPopup {
-  position: fixed;
-  top: 20px;
-  right: 15px;
-  width: 40%;
-  z-index: 5;
+.nav-icons {
+  margin-top: 7px !important;
 }
 
-.wizardHide {
-  display: none;
-}
-
-.downloadInner {
-  max-height: 800px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.abstractContainer {
-  max-height: 400px;
-  overflow-y: auto;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-@media only screen and (max-height:1024px) {
-  .downloadInner {
-    max-height: 700px;
-  }
-
-  .abstractContainer {
-    max-height: 320px;
+@media only screen and (max-width:1200px) {
+  .nav-icons {
+    margin-top: 30px;
   }
 }
 
-@media only screen and (max-height:786px) {
-  .downloadInner {
-    max-height: 500px;
-  }
-
-  .abstractContainer {
-    max-height: 120px;
-  }
+.breadcrumbsContainer {
+  margin-left: 245px;
 }
 
-@media only screen and (max-height:600px) {
-  .downloadInner {
-    max-height: 350px;
-  }
-}
-.leaflet-popup {
-  position: absolute;
-  text-align: center;
+.header-logo img {
+  padding-top: 3px;
 }
 
-.fi-popup hr {
-  margin-top: 3px;
-  margin-bottom: 3px;
+.header-logo {
+  padding-right: 20px;
+}
+
+.applicationTitle {
+  padding-left: 20px;
+  font-size: 200%;
+}
+
+.common-header {
+  background-color: white;
 }
 .iso19115,
 .iso19115 ul,
@@ -95,41 +66,6 @@
 
 .iso19115-head {
   font-weight: bold;
-}
-.nav-icons {
-  margin-top: 7px !important;
-}
-
-@media only screen and (max-width:1200px) {
-  .nav-icons {
-    margin-top: 30px;
-  }
-}
-
-.breadcrumbsContainer {
-  margin-left: 245px;
-}
-
-.header-logo img {
-  padding-top: 3px;
-}
-
-.header-logo {
-  padding-right: 20px;
-}
-
-.applicationTitle {
-  padding-left: 20px;
-  font-size: 200%;
-}
-
-.common-header {
-  background-color: white;
-}
-.common-legend {
-  position: abssolute;
-  bottom: 45px;
-  left: 12px;
 }
 .mvt,
 .mvt ul,
@@ -486,6 +422,11 @@ span.mandatory {
   padding-right: 5px;
   margin: auto;
 }
+.input-format-pill {
+  font-size: 110%;
+  padding: 4px;
+  margin: 5px;
+}
 .nav-icons {
   margin-top: 7px !important;
 }
@@ -515,11 +456,6 @@ span.mandatory {
 
 .common-header {
   background-color: white;
-}
-.input-format-pill {
-  font-size: 110%;
-  padding: 4px;
-  margin: 5px;
 }
 .ed-valid {
   color: green;

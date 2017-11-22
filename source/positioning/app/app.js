@@ -17,7 +17,6 @@
       'common.templates',
       'common.toolbar',
 
-      'explorer.config',
       'explorer.confirm',
       'explorer.drag',
       'explorer.enter',
@@ -34,6 +33,7 @@
       'explorer.version',
       'exp.ui.templates',
 
+      'positioning.config',
       'positioning.download',
       'positioning.file',
       'positioning.filedrop',
@@ -46,10 +46,8 @@
    ])
 
       // Set up all the service providers here.
-      .config(['configServiceProvider', 'projectsServiceProvider', 'versionServiceProvider', 'persistServiceProvider',
-         function (configServiceProvider, projectsServiceProvider, versionServiceProvider, persistServiceProvider) {
-            configServiceProvider.location("positioning/resources/config/positioning.json");
-            configServiceProvider.dynamicLocation("positioning/resources/config/positioning.json?t=");
+      .config(['projectsServiceProvider', 'versionServiceProvider', 'persistServiceProvider',
+         function (projectsServiceProvider, versionServiceProvider, persistServiceProvider) {
             versionServiceProvider.url("positioning/assets/package.json");
             projectsServiceProvider.setProject("positioning");
 				persistServiceProvider.handler("local");

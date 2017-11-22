@@ -8,14 +8,11 @@ class State {
    }
 
    get full() {
-      let files = this.file;
+      let files = this.fileMap;
       if (!files) {
          return false;
       }
-
-      let response = files.dbf && files.prj && files.shp && files.shx;
-      console.log("Response = " + response);
-      return response;
+      return files.dbf && files.shp && files.shx;
    }
 
    get validFileInfo() {
@@ -31,7 +28,7 @@ class State {
       let result = this.latDegreesCol && this.lngDegreesCol && this.isEpsg4283;
 
       if (this.dmsType === "dms") {
-         result &= this.latMinutesCol &&
+         result = result && this.latMinutesCol &&
             this.latSecondsCol &&
             this.lngMinutesCol &&
             this.lngSecondsCol;

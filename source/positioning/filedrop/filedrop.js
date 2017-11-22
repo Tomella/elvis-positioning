@@ -17,9 +17,9 @@
                         case "csv":
                            handleCsv(file);
                            break;
-                        // case "dbf":
-                        // case "prj":
-                        // case "shp":
+                        case "dbf":
+                        case "prj":
+                        case "shp":
                         case "shx":
                            handleShapefile(ext, file);
                            break;
@@ -45,7 +45,7 @@
                   if (!scope.state.file) {
                      scope.state.outputName = name;
                      scope.state.extension = "shp";
-                     scope.state.file = {
+                     scope.state.fileMap = {
                         dbf: false,
                         shp: false,
                         shx: false,
@@ -53,11 +53,12 @@
                      };
                   }
 
-                  if (scope.state.file && (scope.state.ext === "csv" || scope.full || scope.state.outputName !== name)) {
+                  if (scope.state.fileMap && (scope.state.ext === "csv" || scope.full || scope.state.outputName !== name)) {
                      messageService.error("If you are sure you want to replace the current worklow \"Cancel\" the previous workflow first.");
                   } else {
-                     let container = scope.state.file;
+                     let container = scope.state.fileMap;
                      container[ext] = file;
+                     scope.state.file = Object.values(container).filter(file => file);
                   }
                }
             }
