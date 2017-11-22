@@ -25,7 +25,7 @@
       submit: {
          uploadTemplate: "https://gda2020test-ga.fmecloud.com/fmerest/v2/resources/connections/FME_SHAREDRESOURCE_DATA/filesys/GDA2020/UPLOADS?createDirectories=false&overwrite=true&token={token}",
          tokenUrl: 'token',
-         transformUrl: "https://gda2020test-ga.fmecloud.com/fmejobsubmitter/gda2020/GDA94to2020Manager.fmw"
+         transformUrl: "https://gda2020test-ga.fmecloud.com/fmejobsubmitter/gda2020/GDA94to2020Manager.fmw?opt_responseformat=json"
       },
       processing: {
          outFormat: [
@@ -52,6 +52,10 @@
          ]
       },
       transformation: [
+         {
+            key: 'GDA94_to_GDA2020_DC',
+            value: 'GDA94 to GDA2020 DC'
+         },
          {
             key: 'GDA94_to_GDA2020_NSW_C',
             value: 'GDA94 to GDA2020 NSW C'

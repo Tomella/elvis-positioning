@@ -54,7 +54,6 @@
 
                let formData = {
                   input_filename,
-                  type: type,
                   transformation: data.transformation,
                   email: data.email,
                };
