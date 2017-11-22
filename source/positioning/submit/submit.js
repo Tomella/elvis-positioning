@@ -1,6 +1,7 @@
 {
    class SubmitService {
-      constructor($http, configService) {
+      constructor($http, $q, configService) {
+         this.$q = $q;
          this.$http = $http;
          this.config = configService.config.submit;
       }
@@ -11,7 +12,8 @@
 
          // First we get a token
          return this.$http({
-            url: this.config.tokenUrl
+            url: this.config.tokenUrl,
+            cache: true
          }).then(response => {
             // Then we upload the file
 
@@ -40,13 +42,8 @@
             objXhr.open("POST", config.uploadTemplate.replace("{token}", response.data.serviceResponse.token));
             objXhr.send(postData);
 
-            let promise = {
-               then(callback) {
-                  this.callback = callback;
-               }
-            }
-
-            return promise;
+            let promise = this.$q.defer();
+            return promise.promise;
 
             // CONFIRMATION.
             function transferComplete(e) {
@@ -78,12 +75,16 @@
                   headers: {
                      "Content-Type": "application/json"
                   }
-               }).then(data => promise.callback(data));
+               }).then(data =>
+                  promise.resolve(data)
+               ).catch(data =>
+                  promise.reject(data)
+               );
             }
          });
       }
    }
-   SubmitService.$inject = ["$http", "configService"];
+   SubmitService.$inject = ["$http", "$q", "configService"];
 
    angular.module("positioning.submit", [])
       .service("submitService", SubmitService)

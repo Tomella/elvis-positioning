@@ -12,13 +12,37 @@
       </br/>
       <div>
          <span style="font-weight: bold">Shapefile -</span>
-         Drop  four files with the same file prefix to transform a shapefile
+         Drop  three or four files with the same file prefix to transform a shapefile
          <ul>
             <li>".shp" — shape format; the feature geometry itself.</li>
             <li>".shx" — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly.</li>
             <li>".dbf" — attribute format; columnar attributes for each shape, in dBase IV format.</li>
-            <li>".prj" — projection; describes the coordinate system and projection information used.</li>
+            <li>".prj" — OPTIONAL — projection; describes the coordinate system and projection information used.</li>
          </ul>
+      </div>
+      <div>
+         <span style="font-weight: bold">JPEG2000 -</span>
+         Drop a single CSV file with a ".j2", ".j2k", ".jpx", ".jpf", ".jpm", ".jpp", ".jp2000" or ".jp2k" extension and we will process this as a JPEG2000 file.
+      </div>
+      </br/>
+      <div>
+         <span style="font-weight: bold">GeoJSON -</span>
+         Drop a single GeoJSON file with a ".json" extension and we will process this as a GeoJSON file.
+      </div>
+      </br/>
+      <div>
+         <span style="font-weight: bold">GeoTIFF -</span>
+         Drop a single GeoTIFF file with a ".tif" extension and we will process this as a GeoTIFF file.
+      </div>
+      </br/>
+      <div>
+         <span style="font-weight: bold">ASCII Grid -</span>
+         Drop a single ASCII Grid file with an ".asc" extension and we will process this as a ASCII Grid file.
+      </div>
+      </br/>
+      <div>
+         <span style="font-weight: bold">ECW -</span>
+         Drop a single ECW file with an ".ecw" extension and we will process this as a ECW file.
       </div>
    </div>
 
@@ -37,6 +61,9 @@
       <div ng-if="state.extension == 'shp'">
          <shp-file state="state" settings="settings" />
       </div>
+      <div ng-if="state.type == 'single'">
+         <h4>A few questions about your file named "{{state.file.name}}"</h4>
+      </div>
       <transformation-target state="state"></transformation-target>
       <accept-epsg4283 state="state"></accept-epsg4283>
    </div>
@@ -47,6 +74,7 @@
       </div>
 
       <div style="padding-top: 10px">
+         <progress-bar-single state="state" ng-show="state.type == 'single'"/>
          <progress-bar-csv state="state" ng-show="state.extension == 'csv'"/>
          <progress-bar-shapefile state="state" ng-show="state.extension == 'shp'" />
       </div>

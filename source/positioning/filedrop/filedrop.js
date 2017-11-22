@@ -23,18 +23,44 @@
                         case "shx":
                            handleShapefile(ext, file);
                            break;
+                        case "json":
+                        case "tif":
+                        case "asc":
+                        case "ecw":
+                        case "j2":
+                        case "j2k":
+                        case "jpx":
+                        case "jpf":
+                        case "jpm":
+                        case "jpp":
+                        case "jp2000":
+                        case "jp2k":
+                           handleSingle(ext, file);
+                           break;
                         default:
                            messageService.warn("Ignoring \"" + file.name + "\" as it is not a supported format.");
                      }
                   });
                });
 
+               function handleSingle(ext, file) {
+                  if (scope.state.file) {
+                     messageService.error("If you are sure you want to replace the current worklow \"Cancel\" the previous workflow first.");
+                  } else {
+                     scope.state.file = file;
+                     scope.state.type = "single";
+                     scope.state.extension = ext;
+                     scope.state.outputName = file.name.substr(0, file.name.lastIndexOf("."));
+                  }
+               }
+
+
                function handleCsv(file) {
                   if (scope.state.file) {
                      messageService.error("If you are sure you want to replace the current worklow \"Cancel\" the previous workflow first.");
                   } else {
-                     scope.state.file = file
-                     scope.state.extension = "csv";
+                     scope.state.file = file;
+                     scope.state.type = scope.state.extension = "csv";
                      scope.state.outputName = file.name.substr(0, file.name.lastIndexOf("."));
                   }
                }
@@ -44,7 +70,7 @@
 
                   if (!scope.state.file) {
                      scope.state.outputName = name;
-                     scope.state.extension = "shp";
+                     scope.state.type = scope.state.extension = "shp";
                      scope.state.fileMap = {
                         dbf: false,
                         shp: false,

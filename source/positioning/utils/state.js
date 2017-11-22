@@ -3,6 +3,11 @@ class State {
       return this.extension === 'csv';
    }
 
+   get isSinglefile() {
+      return this.type === 'single';
+   }
+
+
    get isShapefile() {
       return this.extension === 'shp';
    }
@@ -15,12 +20,18 @@ class State {
       return files.dbf && files.shp && files.shx;
    }
 
+   ////////////////////////////////
+   // Showld have extra classes and polymorphism
    get validFileInfo() {
       // It's either CSV or SHP at the moment
       return this.isCsv ? this.validCsvFileInfo : this.validShpFileInfo;
    }
 
    get validShpFileInfo() {
+      return true;
+   }
+
+   get validSingleFileInfo() {
       return true;
    }
 
@@ -35,6 +46,7 @@ class State {
       }
       return result;
    }
+   //////////////////////////////////
 
    get validEmail() {
       // We assume they only put in valid email addresses
@@ -89,7 +101,9 @@ class State {
 
       } else if (this.isShapefile) {
          Object.keys(this.file).forEach(key => count += this.file[key] ? 1 : 0)
-         parts +=4;
+         parts += 4;
+      } else if (this.isSinglefile) {
+         // Nothing more, only here to show that there is nothing more.
       }
 
       return 100 * count / parts;

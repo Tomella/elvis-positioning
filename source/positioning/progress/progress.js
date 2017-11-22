@@ -1,7 +1,7 @@
 {
    angular.module("positioning.progress", ["positioning.submit"])
 
-      .directive("progressBarCsv", ["messageService", "submitService", function (messageService, submitService) {
+      .directive("progressBarCsv", ["flashService", "messageService", "submitService", function (flashService, messageService, submitService) {
          return {
             scope: {
                state: "="
@@ -9,10 +9,14 @@
             templateUrl: "positioning/progress/progresscsv.html",
             link: function (scope) {
                scope.submit = function () {
-                  submitService.post(scope.state).catch(error => {
+                  let flasher = flashService.add("Uploading files", 30000, true);
+                  submitService.post(scope.state).then(() => {
+                     flasher.remove();
+                     messageService.success("Files are queued for processing. You will receive an email on completion.");
+                  }).catch(error => {
+                     flasher.remove();
                      messageService.error("Posted CSV file for processing but the request failed. Please try again later.");
                   });
-                  messageService.success("Posted CSV file for processing. You will receive an email on completion.");
                   scope.state = new State();
                };
 
@@ -24,7 +28,34 @@
          };
       }])
 
-      .directive("progressBarShapefile", ["messageService", "submitService", function (messageService, submitService) {
+      .directive("progressBarSingle", ["flashService", "messageService", "submitService", function (flashService, messageService, submitService) {
+         return {
+            scope: {
+               state: "="
+            },
+            templateUrl: "positioning/progress/progresssingle.html",
+            link: function (scope) {
+               scope.submit = function () {
+                  let flasher = flashService.add("Uploading files", 30000, true);
+                  submitService.post(scope.state).then(() => {
+                     flasher.remove();
+                     messageService.success("Files are queued for processing. You will receive an email on completion.");
+                  }).catch(error => {
+                     flasher.remove();
+                     messageService.error("Posted file for processing but the request failed. Please try again later.");
+                  });
+                  scope.state = new State();
+               };
+
+               scope.cancel = function () {
+                  messageService.success("Cleared selected file");
+                  scope.state = new State();
+               };
+            }
+         };
+      }])
+
+      .directive("progressBarShapefile", ["flashService", "messageService", "submitService", function (flashService, messageService, submitService) {
          return {
             scope: {
                state: "="
@@ -32,8 +63,14 @@
             templateUrl: "positioning/progress/progresshapefile.html",
             link: function (scope) {
                scope.submit = function () {
-                  submitService.post(scope.state);
-                  messageService.success("Posted shapefiles for processing. You will receive an email on completion.");
+                  let flasher = flashService.add("Uploading files", 30000, true);
+                  submitService.post(scope.state).then(() => {
+                     flasher.remove();
+                     messageService.success("Files are queued for processing. You will receive an email on completion.");
+                  }).catch(error => {
+                     flasher.remove();
+                     messageService.error("Posted file for processing but the request failed. Please try again later.");
+                  });
                   scope.state = new State();
                };
 

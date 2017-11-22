@@ -17,39 +17,43 @@
             name: 'Shapefile',
             url: 'http://wiki.openstreetmap.org/wiki/Shapefiles',
             description: 'ESRI shapefile format is a popular geospatial vector data format for geographic information system (GIS) software.',
-            extensions: [
-               'shp'
-            ]
+            extensions: ['shp' ]
+         },
+         {
+            name: 'JPEG2000',
+            url: 'https://en.wikipedia.org/wiki/JPEG_2000',
+            description: 'JPEG 2000 (JP2) is an image compression standard and coding system.',
+            extensions: [ "j2", "j2k", "jpx", "jpf", "jpm", "jpp", "jp2000", "jp2k"]
+         },
+         {
+            name: 'GeoJSON',
+            url: 'https://en.wikipedia.org/wiki/GeoJSON',
+            description: 'GeoJSON is an open standard format designed for representing simple geographical features, based on JSON.',
+            extensions: [ "json"]
+         },
+         {
+            name: 'GeoTIFF',
+            url: 'https://en.wikipedia.org/wiki/GeoTIFF',
+            description: 'GeoTIFF is a public domain metadata standard which allows georeferencing information to be embedded within a TIFF file.',
+            extensions: [ "tif"]
+         },
+         {
+            name: 'ASCII Grid',
+            url: 'https://en.wikipedia.org/wiki/Comma-separated_values',
+            description: 'An Esri grid is a raster GIS file format developed by Esri, which has two formats and we accept the ASCII format here.',
+            extensions: [ "asc"]
+         },
+         {
+            name: 'ECW',
+            url: 'https://en.wikipedia.org/wiki/ECW_(file_format)',
+            description: 'ECW, an enhanced compressed wavelet file format designed for geospatial imagery.',
+            extensions: [ "ecw"]
          }
       ],
       submit: {
          uploadTemplate: "https://gda2020test-ga.fmecloud.com/fmerest/v2/resources/connections/FME_SHAREDRESOURCE_DATA/filesys/GDA2020/UPLOADS?createDirectories=false&overwrite=true&token={token}",
          tokenUrl: 'token',
          transformUrl: "https://gda2020test-ga.fmecloud.com/fmejobsubmitter/gda2020/GDA94to2020Manager.fmw?opt_responseformat=json"
-      },
-      processing: {
-         outFormat: [
-            {
-               code: 'ESRIASCIIGRID',
-               value: 'Esri ASCII Grid',
-               description: 'An Esri ASCII grid is a raster GIS file format developed by Esri. The grid defines geographic space as an array of equally sized square grid points arranged in rows and columns. Each grid point stores a numeric value that represents elevation or surface slope for that unit of space. Each grid cell is referenced by its x,y coordinate location.'
-            },
-            {
-               code: 'GEOTIFF',
-               value: 'Geo TIFF (Geo-referenced Tageed Image File Format)',
-               description: 'GeoTIFF is a public domain metadata standard which allows georeferencing information to be embedded within a TIFF file.'
-            },
-            {
-               code: 'NETCDF',
-               value: 'NetCDF (Network Common Data Form',
-               description: 'NetCDF is a set of software libraries and self-describing, machine-independent data formats that support the creation, access, and sharing of array-oriented scientific data.'
-            },
-            {
-               code: 'NGRID',
-               value: 'MapInfo Vertical Mapper Grid (NGrid)',
-               description: 'NGrid is a binary raster format with header information. For each raster, there is only a single feature returned, since this feature will contain the entire raster. A single feature is stored in a single file, with header information in an associated MapInfo TAB file.'
-            }
-         ]
       },
       transformation: [
          {

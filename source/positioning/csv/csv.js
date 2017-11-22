@@ -41,6 +41,7 @@
                settings: "="
             },
             link: function(scope) {
+               scope.state.dmsType = "deg";
                csvService.getColumns(scope.state.file).then(csv => {
                   scope.columns = csv[0];
                });
