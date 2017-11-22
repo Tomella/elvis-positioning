@@ -87,7 +87,6 @@
             if (!files) {
                return 0;
             }
-
             return Object.keys(files).reduce((acc, key) => acc + files[key].size, 0)
          };
       }]);

@@ -378,17 +378,6 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
-.csv-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.csv-fix-label label {
-  width: 10em;
-  text-align: right;
-}
 .upload-dialog p {
   padding: 15px;
   margin-top: 10px;
@@ -399,6 +388,17 @@ div.leaflet-control-scale-line {
   margin-top: 10px;
   padding: 5px;
   border-radius: 4px;
+}
+.csv-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.csv-fix-label label {
+  width: 10em;
+  text-align: right;
 }
 .hide {
   display: none;

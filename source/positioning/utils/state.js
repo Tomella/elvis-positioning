@@ -100,8 +100,8 @@ class State {
          }
 
       } else if (this.isShapefile) {
-         Object.keys(this.file).forEach(key => count += this.file[key] ? 1 : 0)
-         parts += 4;
+         ["dbf", "shp", "shx"].forEach(key => count += this.fileMap[key] ? 1 : 0)
+         parts += 3;
       } else if (this.isSinglefile) {
          // Nothing more, only here to show that there is nothing more.
       }
