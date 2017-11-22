@@ -155,60 +155,6 @@ angular.module('common.accordion', ['ui.bootstrap.collapse']).constant('commonAc
     return 'common-accordion-header,' + 'data-common-accordion-header,' + 'x-common-accordion-header,' + 'common\\:accordion-header,' + '[common-accordion-header],' + '[data-common-accordion-header],' + '[x-common-accordion-header]';
   }
 });
-'use strict';
-
-(function (angular) {
-
-	'use strict';
-
-	angular.module('common.header', []).controller('headerController', ['$scope', '$q', '$timeout', function ($scope, $q, $timeout) {
-
-		var modifyConfigSource = function modifyConfigSource(headerConfig) {
-			return headerConfig;
-		};
-
-		$scope.$on('headerUpdated', function (event, args) {
-			$scope.headerConfig = modifyConfigSource(args);
-		});
-	}]).directive('icsmHeader', [function () {
-		var defaults = {
-			current: "none",
-			heading: "ICSM",
-			headingtitle: "ICSM",
-			helpurl: "help.html",
-			helptitle: "Get help about ICSM",
-			helpalttext: "Get help about ICSM",
-			skiptocontenttitle: "Skip to content",
-			skiptocontent: "Skip to content",
-			quicklinksurl: "/search/api/quickLinks/json?lang=en-US"
-		};
-		return {
-			transclude: true,
-			restrict: 'EA',
-			templateUrl: "common/header/header.html",
-			scope: {
-				current: "=",
-				breadcrumbs: "=",
-				heading: "=",
-				headingtitle: "=",
-				helpurl: "=",
-				helptitle: "=",
-				helpalttext: "=",
-				skiptocontenttitle: "=",
-				skiptocontent: "=",
-				quicklinksurl: "="
-			},
-			link: function link(scope, element, attrs) {
-				var data = angular.copy(defaults);
-				angular.forEach(defaults, function (value, key) {
-					if (!(key in scope)) {
-						scope[key] = value;
-					}
-				});
-			}
-		};
-	}]).factory('headerService', ['$http', function () {}]);
-})(angular);
 "use strict";
 
 {
@@ -334,6 +280,60 @@ angular.module('common.accordion', ['ui.bootstrap.collapse']).constant('commonAc
          return f.toUpperCase();
       }).replace(/([A-Z])/g, ' $1').trim();
    }
+})(angular);
+'use strict';
+
+(function (angular) {
+
+	'use strict';
+
+	angular.module('common.header', []).controller('headerController', ['$scope', '$q', '$timeout', function ($scope, $q, $timeout) {
+
+		var modifyConfigSource = function modifyConfigSource(headerConfig) {
+			return headerConfig;
+		};
+
+		$scope.$on('headerUpdated', function (event, args) {
+			$scope.headerConfig = modifyConfigSource(args);
+		});
+	}]).directive('icsmHeader', [function () {
+		var defaults = {
+			current: "none",
+			heading: "ICSM",
+			headingtitle: "ICSM",
+			helpurl: "help.html",
+			helptitle: "Get help about ICSM",
+			helpalttext: "Get help about ICSM",
+			skiptocontenttitle: "Skip to content",
+			skiptocontent: "Skip to content",
+			quicklinksurl: "/search/api/quickLinks/json?lang=en-US"
+		};
+		return {
+			transclude: true,
+			restrict: 'EA',
+			templateUrl: "common/header/header.html",
+			scope: {
+				current: "=",
+				breadcrumbs: "=",
+				heading: "=",
+				headingtitle: "=",
+				helpurl: "=",
+				helptitle: "=",
+				helpalttext: "=",
+				skiptocontenttitle: "=",
+				skiptocontent: "=",
+				quicklinksurl: "="
+			},
+			link: function link(scope, element, attrs) {
+				var data = angular.copy(defaults);
+				angular.forEach(defaults, function (value, key) {
+					if (!(key in scope)) {
+						scope[key] = value;
+					}
+				});
+			}
+		};
+	}]).factory('headerService', ['$http', function () {}]);
 })(angular);
 'use strict';
 
@@ -721,6 +721,70 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(angular);
 "use strict";
 
+{
+   angular.module("common.proxy", []).provider("proxy", function () {
+
+      this.$get = ['$http', '$q', function ($http, $q) {
+         var base = "proxy/";
+
+         this.setProxyBase = function (newBase) {
+            base = newBase;
+         };
+
+         return {
+            get: function get(url, options) {
+               return this._method("get", url, options);
+            },
+
+            post: function post(url, options) {
+               return this._method("post", url, options);
+            },
+
+            put: function put(url, options) {
+               return this._method("put", url, options);
+            },
+
+            _method: function _method(method, url, options) {
+               return $http[method](base + url, options).then(function (response) {
+                  return response.data;
+               });
+            }
+         };
+      }];
+   });
+}
+"use strict";
+
+(function (angular) {
+   'use strict';
+
+   angular.module("common.scroll", []).directive("commonScroller", ['$timeout', function ($timeout) {
+      return {
+         scope: {
+            more: "&",
+            buffer: "=?"
+         },
+         link: function link(scope, element, attrs) {
+            var fetching;
+            if (!scope.buffer) scope.buffer = 100;
+
+            element.on("scroll", function (event) {
+               var target = event.currentTarget;
+               $timeout.cancel(fetching);
+               fetching = $timeout(bouncer, 120);
+
+               function bouncer() {
+                  if (scope.more && target.scrollHeight - target.scrollTop <= target.clientHeight + scope.buffer) {
+                     scope.more();
+                  }
+               }
+            });
+         }
+      };
+   }]);
+})(angular);
+"use strict";
+
 (function (angular) {
 	'use strict';
 
@@ -793,90 +857,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		};
 	}
 })(angular);
-"use strict";
-
-{
-   angular.module("common.proxy", []).provider("proxy", function () {
-
-      this.$get = ['$http', '$q', function ($http, $q) {
-         var base = "proxy/";
-
-         this.setProxyBase = function (newBase) {
-            base = newBase;
-         };
-
-         return {
-            get: function get(url, options) {
-               return this._method("get", url, options);
-            },
-
-            post: function post(url, options) {
-               return this._method("post", url, options);
-            },
-
-            put: function put(url, options) {
-               return this._method("put", url, options);
-            },
-
-            _method: function _method(method, url, options) {
-               return $http[method](base + url, options).then(function (response) {
-                  return response.data;
-               });
-            }
-         };
-      }];
-   });
-}
-'use strict';
-
-(function (angular) {
-  'use strict';
-
-  // from http://stackoverflow.com/a/18609594
-
-  angular.module('common.recursionhelper', []).factory('RecursionHelper', ['$compile', function ($compile) {
-    return {
-      /**
-       * Manually compiles the element, fixing the recursion loop.
-       * @param element
-       * @param [link] A post-link function, or an object with function(s)
-       * registered via pre and post properties.
-       * @returns An object containing the linking functions.
-       */
-      compile: function compile(element, link) {
-        // Normalize the link parameter
-        if (angular.isFunction(link)) {
-          link = { post: link };
-        }
-
-        // Break the recursion loop by removing the contents
-        var contents = element.contents().remove();
-        var compiledContents;
-        return {
-          pre: link && link.pre ? link.pre : null,
-          /**
-           * Compiles and re-adds the contents
-           */
-          post: function post(scope, element) {
-            // Compile the contents
-            if (!compiledContents) {
-              compiledContents = $compile(contents);
-            }
-            // Re-add the compiled contents to the element
-            compiledContents(scope, function (clone) {
-              element.append(clone);
-            });
-
-            // Call the post-linking function, if any
-            if (link && link.post) {
-              link.post.apply(null, arguments);
-            }
-          }
-        };
-      }
-    };
-  }]);
-})(angular);
 'use strict';
 
 (function (angular) {
@@ -928,35 +908,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		};
 	}]);
 })(angular);
-"use strict";
+'use strict';
 
 (function (angular) {
-   'use strict';
+  'use strict';
 
-   angular.module("common.scroll", []).directive("commonScroller", ['$timeout', function ($timeout) {
-      return {
-         scope: {
-            more: "&",
-            buffer: "=?"
-         },
-         link: function link(scope, element, attrs) {
-            var fetching;
-            if (!scope.buffer) scope.buffer = 100;
+  // from http://stackoverflow.com/a/18609594
 
-            element.on("scroll", function (event) {
-               var target = event.currentTarget;
-               $timeout.cancel(fetching);
-               fetching = $timeout(bouncer, 120);
+  angular.module('common.recursionhelper', []).factory('RecursionHelper', ['$compile', function ($compile) {
+    return {
+      /**
+       * Manually compiles the element, fixing the recursion loop.
+       * @param element
+       * @param [link] A post-link function, or an object with function(s)
+       * registered via pre and post properties.
+       * @returns An object containing the linking functions.
+       */
+      compile: function compile(element, link) {
+        // Normalize the link parameter
+        if (angular.isFunction(link)) {
+          link = { post: link };
+        }
 
-               function bouncer() {
-                  if (scope.more && target.scrollHeight - target.scrollTop <= target.clientHeight + scope.buffer) {
-                     scope.more();
-                  }
-               }
+        // Break the recursion loop by removing the contents
+        var contents = element.contents().remove();
+        var compiledContents;
+        return {
+          pre: link && link.pre ? link.pre : null,
+          /**
+           * Compiles and re-adds the contents
+           */
+          post: function post(scope, element) {
+            // Compile the contents
+            if (!compiledContents) {
+              compiledContents = $compile(contents);
+            }
+            // Re-add the compiled contents to the element
+            compiledContents(scope, function (clone) {
+              element.append(clone);
             });
-         }
-      };
-   }]);
+
+            // Call the post-linking function, if any
+            if (link && link.post) {
+              link.post.apply(null, arguments);
+            }
+          }
+        };
+      }
+    };
+  }]);
 })(angular);
 "use strict";
 
@@ -1002,12 +1002,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(angular);
 angular.module("common.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("common/accordion/accordion.html","<div role=\"tablist\" class=\"panel-group\" ng-transclude></div>");
 $templateCache.put("common/accordion/accordionGroup.html","<div role=\"tab\" id=\"{{::headingId}}\" aria-selected=\"{{isOpen}}\" class=\"panel-heading\" ng-keypress=\"toggleOpen($event)\">\r\n  <h4 class=\"panel-title\">\r\n    <a role=\"button\" data-toggle=\"collapse\" href aria-expanded=\"{{isOpen}}\"\r\n            aria-controls=\"{{::panelId}}\" tabindex=\"0\" class=\"accordion-toggle\" ng-click=\"toggleOpen()\"\r\n            common-accordion-transclude=\"heading\" ng-disabled=\"isDisabled\" uib-tabindex-toggle>\r\n      <span common-accordion-header ng-class=\"{\'text-muted\': isDisabled}\">{{heading}}</span>\r\n   </a>\r\n  </h4>\r\n</div>\r\n<div id=\"{{::panelId}}\" aria-labelledby=\"{{::headingId}}\" aria-hidden=\"{{!isOpen}}\" role=\"tabpanel\"\r\n            class=\"panel-collapse collapse\" uib-collapse=\"!isOpen\">\r\n  <div class=\"panel-body\" ng-transclude></div>\r\n</div>");
-$templateCache.put("common/header/header.html","<div class=\"container-full common-header\" style=\"padding-right:10px; padding-left:10px\">\r\n    <div class=\"navbar-header\">\r\n\r\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".ga-header-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n\r\n        <a href=\"/\" class=\"appTitle visible-xs\">\r\n            <h1 style=\"font-size:120%\">{{heading}}</h1>\r\n        </a>\r\n    </div>\r\n    <div class=\"navbar-collapse collapse ga-header-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li class=\"hidden-xs\"><a href=\"/\"><h1 class=\"applicationTitle\">{{heading}}</h1></a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right nav-icons\">\r\n        	<li common-navigation role=\"menuitem\" current=\"current\" style=\"padding-right:10px\"></li>\r\n			<li mars-version-display role=\"menuitem\"></li>\r\n			<li style=\"width:10px\"></li>\r\n        </ul>\r\n    </div><!--/.nav-collapse -->\r\n</div>\r\n\r\n<!-- Strap -->\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <div class=\"strap-blue\">\r\n        </div>\r\n        <div class=\"strap-white\">\r\n        </div>\r\n        <div class=\"strap-red\">\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("common/cc/cc.html","<button type=\"button\" class=\"undecorated\" title=\"View CCBy {{details.version}} licence details\"\r\n      popover-trigger=\"outsideClick\"\r\n      uib-popover-template=\"template\" popover-placement=\"bottom\" popover-append-to-body=\"true\">\r\n	<i ng-class=\"{active:data.isWmsShowing}\" class=\"fa fa-lg fa-gavel\"></i>\r\n</button>");
 $templateCache.put("common/cc/cctemplate.html","<div>\r\n   <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n         <a target=\"_blank\" ng-href=\"{{details.link}}\">Creative Commons Attribution {{details.version}} </a>\r\n      </div>\r\n   </div>\r\n   <div class=\"row\">\r\n      <div class=\"col-md-2\">\r\n         <span class=\"fa-stack\" aria-hidden=\"true\">\r\n         <i class=\"fa fa-check-circle-o fa-stack-2x\" aria-hidden=\"true\"></i>\r\n      </span>\r\n      </div>\r\n      <div class=\"col-md-10\">\r\n         You may use this work for commercial purposes.\r\n      </div>\r\n   </div>\r\n   <div class=\"row\">\r\n      <div class=\"col-md-2\">\r\n         <span class=\"fa-stack\" aria-hidden=\"true\">\r\n         <i class=\"fa fa-circle-o fa-stack-2x\"></i>\r\n         <i class=\"fa fa-female fa-stack-1x\"></i>\r\n      </span>\r\n      </div>\r\n      <div class=\"col-md-10\">\r\n         You must attribute the creator in your own works.\r\n      </div>\r\n   </div>\r\n</div>");
 $templateCache.put("common/iso19115/contact.html","<ul ng-show=\"node.hierarchyLevel\">\r\n   <li>\r\n      <span class=\"iso19115-head\">Contact</span>\r\n      <iso19115-node name=\"MD_ScopeCode\" node=\"node.hierarchyLevel.MD_ScopeCode\" type=\"_codeListValue\"></iso19115-node>\r\n    </li>\r\n</ul>");
 $templateCache.put("common/iso19115/double.html","\r\n<ul ng-show=\"node\">\r\n   <li>\r\n      <span class=\"iso19115-head\">{{name | iso19115NodeName}}</span>\r\n      <iso19115-node name=\"name\" node=\"node[name]\" type=\"type\"></iso19115-node>\r\n   </li>\r\n</ul>\r\n");
 $templateCache.put("common/iso19115/metadata.html","<div class=\"iso19115\">\r\n   <ul>\r\n      <li>\r\n         <span class=\"iso19115-head\">Metadata</span>\r\n         <iso19115-node name=\"fileIdentifier\" node=\"node.fileIdentifier\" type=\"CharacterString\"></iso19115-node>\r\n         <iso19115-node name=\"language\" node=\"node.language\" type=\"LanguageCode\"></iso19115-node>\r\n         <ul ng-show=\"node.characterSet\">\r\n            <li>\r\n               <span class=\"iso19115-head\">Character Set</span>\r\n               <iso19115-node name=\"CharacterSetCode\" node=\"node.characterSet.MD_CharacterSetCode\" type=\"_codeListValue\"></iso19115-node>\r\n            </li>\r\n         </ul>\r\n\r\n         <ul ng-show=\"node.hierarchyLevel\">\r\n            <li>\r\n               <span class=\"iso19115-head\">Hierarchy Level</span>\r\n               <iso19115-node name=\"MD_ScopeCode\" node=\"node.hierarchyLevel.MD_ScopeCode\" type=\"_codeListValue\"></iso19115-node>\r\n            </li>\r\n         </ul>\r\n         <iso19115-node name=\"hierarchyLevelName\" node=\"node.hierarchyLevelName\" type=\"CharacterString\"></iso19115-node>\r\n         <iso19115-contact ng-if=\"node.contact\" node=\"node.contact\" key=\"\'contact\'\"></iso19115-contact>\r\n      </li>\r\n   </ul>\r\n</div>");
+$templateCache.put("common/header/header.html","<div class=\"container-full common-header\" style=\"padding-right:10px; padding-left:10px\">\r\n    <div class=\"navbar-header\">\r\n\r\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".ga-header-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n\r\n        <a href=\"/\" class=\"appTitle visible-xs\">\r\n            <h1 style=\"font-size:120%\">{{heading}}</h1>\r\n        </a>\r\n    </div>\r\n    <div class=\"navbar-collapse collapse ga-header-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li class=\"hidden-xs\"><a href=\"/\"><h1 class=\"applicationTitle\">{{heading}}</h1></a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right nav-icons\">\r\n        	<li common-navigation role=\"menuitem\" current=\"current\" style=\"padding-right:10px\"></li>\r\n			<li mars-version-display role=\"menuitem\"></li>\r\n			<li style=\"width:10px\"></li>\r\n        </ul>\r\n    </div><!--/.nav-collapse -->\r\n</div>\r\n\r\n<!-- Strap -->\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <div class=\"strap-blue\">\r\n        </div>\r\n        <div class=\"strap-white\">\r\n        </div>\r\n        <div class=\"strap-red\">\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("common/metaview/dublincore.html","Dublin core");
 $templateCache.put("common/metaview/iso19115.html","<iso19115-metadata node=\"data.metadata.GetRecordByIdResponse.MD_Metadata\" key=\"\'MD_Metadata\'\"></iso19115-metadata>\r\n");
 $templateCache.put("common/metaview/iso19115node.html","<ul>\r\n   <li>\r\n      <span class=\"metaview-head\">{{key | metaviewNodeName}}</span>\r\n      <span>{{node | metaviewText}}</span>\r\n      <ng-repeat ng-if=\"isArray()\" ng-repeat=\"next in node\" node=\"next]\">\r\n         <metaview-iso19115-array ng-repeat=\"nextKey in getKeys() track by $index\" node=\"node[nextKey]\" key=\"nextKey\"></metaview-iso19115-array>\r\n      </ng-repeat>\r\n      <metaview-iso19115-node ng-if=\"!isArray()\" ng-repeat=\"nextKey in getKeys() track by $index\" node=\"node[nextKey]\" key=\"nextKey\"></metaview-iso19115-node>\r\n   </li>\r\n</ul>");

@@ -1,33 +1,3 @@
-.nav-icons {
-  margin-top: 7px !important;
-}
-
-@media only screen and (max-width:1200px) {
-  .nav-icons {
-    margin-top: 30px;
-  }
-}
-
-.breadcrumbsContainer {
-  margin-left: 245px;
-}
-
-.header-logo img {
-  padding-top: 3px;
-}
-
-.header-logo {
-  padding-right: 20px;
-}
-
-.applicationTitle {
-  padding-left: 20px;
-  font-size: 200%;
-}
-
-.common-header {
-  background-color: white;
-}
 .iso19115,
 .iso19115 ul,
 .iso19115 li {
@@ -66,6 +36,36 @@
 
 .iso19115-head {
   font-weight: bold;
+}
+.nav-icons {
+  margin-top: 7px !important;
+}
+
+@media only screen and (max-width:1200px) {
+  .nav-icons {
+    margin-top: 30px;
+  }
+}
+
+.breadcrumbsContainer {
+  margin-left: 245px;
+}
+
+.header-logo img {
+  padding-top: 3px;
+}
+
+.header-logo {
+  padding-right: 20px;
+}
+
+.applicationTitle {
+  padding-left: 20px;
+  font-size: 200%;
+}
+
+.common-header {
+  background-color: white;
 }
 .mvt,
 .mvt ul,
@@ -309,6 +309,29 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.main-body {
+  position: fixed;
+  top: 85px;
+  left: 0px;
+  right: 0px;
+  bottom: 8px;
+  overflow-y: auto;
+}
+
+.point-at-box {
+  transform: rotate(-35deg);
+}
+
+@media screen and (max-width: 990px) {
+  .point-at-box {
+    transform: rotate(135deg);
+  }
+}
+
+span.mandatory {
+  content: "*";
+  color: red;
+}
 .radCore {
   margin-right: 3px;
   display: inline-block;
@@ -355,40 +378,6 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
-.main-body {
-  position: fixed;
-  top: 85px;
-  left: 0px;
-  right: 0px;
-  bottom: 8px;
-  overflow-y: auto;
-}
-
-.point-at-box {
-  transform: rotate(-35deg);
-}
-
-@media screen and (max-width: 990px) {
-  .point-at-box {
-    transform: rotate(135deg);
-  }
-}
-
-span.mandatory {
-  content: "*";
-  color: red;
-}
-.csv-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.csv-fix-label label {
-  width: 10em;
-  text-align: right;
-}
 .upload-dialog p {
   padding: 15px;
   margin-top: 10px;
@@ -400,12 +389,16 @@ span.mandatory {
   padding: 5px;
   border-radius: 4px;
 }
-.hide {
-  display: none;
+.csv-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-.file-container {
-  margin-top: 0;
+.csv-fix-label label {
+  width: 10em;
+  text-align: right;
 }
 #fileDrop {
   font-weight: bold;
@@ -421,6 +414,13 @@ span.mandatory {
   padding-left: 5px;
   padding-right: 5px;
   margin: auto;
+}
+.hide {
+  display: none;
+}
+
+.file-container {
+  margin-top: 0;
 }
 .input-format-pill {
   font-size: 110%;
@@ -457,17 +457,6 @@ span.mandatory {
 .common-header {
   background-color: white;
 }
-.shp-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.shp-fix-label label {
-  width: 10em;
-  text-align: right;
-}
 .ed-valid {
   color: green;
 }
@@ -478,4 +467,15 @@ span.mandatory {
 
 .ed-active {
   color: red;
+}
+.shp-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.shp-fix-label label {
+  width: 10em;
+  text-align: right;
 }
