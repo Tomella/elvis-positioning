@@ -57,8 +57,12 @@
       },
       transformation: [
          {
+            key: 'GDA94_to_GDA2020_C',
+            value: 'Conformal'
+         },
+         {
             key: 'GDA94_to_GDA2020_DC',
-            value: 'GDA94 to GDA2020 DC'
+            value: 'Conformal and Distortion'
          },
          {
             key: 'GDA94_to_GDA2020_NSW_C',
