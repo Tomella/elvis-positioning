@@ -28,6 +28,45 @@
 .common-header {
   background-color: white;
 }
+.iso19115,
+.iso19115 ul,
+.iso19115 li {
+  position: relative;
+}
+
+.iso19115 ul {
+  list-style: none;
+  padding-left: 32px;
+}
+
+.iso19115 li::before,
+.iso19115 li::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+.iso19115 li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+.iso19115 li::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+.iso19115 ul > li:last-child::after {
+  height: 8px;
+}
+
+.iso19115-head {
+  font-weight: bold;
+}
 .mvt,
 .mvt ul,
 .mvt li {
@@ -72,44 +111,91 @@
   padding-left: 3px;
   padding-right: 3px;
 }
-.iso19115,
-.iso19115 ul,
-.iso19115 li {
-  position: relative;
-}
-
-.iso19115 ul {
-  list-style: none;
-  padding-left: 32px;
-}
-
-.iso19115 li::before,
-.iso19115 li::after {
-  content: "";
+.icsmTabs {
   position: absolute;
-  left: -12px;
+  top: 0px;
+  right: 30px;
+  z-index: 1;
 }
 
-.iso19115 li::before {
-  border-top: 1px solid #000;
-  top: 9px;
-  width: 8px;
-  height: 0;
+.icsmTabsOpen {
+  right: 30px;
 }
 
-.iso19115 li::after {
-  border-left: 1px solid #000;
+.panesMapContainer {
+  z-index: 0;
+  width: 100%;
   height: 100%;
-  width: 0px;
-  top: 2px;
 }
 
-.iso19115 ul > li:last-child::after {
-  height: 8px;
+.icsmPanesRow {
+  height: 100%;
+  margin-right: 0;
 }
 
-.iso19115-head {
-  font-weight: bold;
+.icsmPanesCol {
+  height: 100%;
+}
+
+.icsmPanesColRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.paneTabsMain {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  padding-top: 8px;
+  right: 0px;
+  background: #FFF;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.panesTabsContainer {
+  position: absolute;
+  width: 9999px;
+  z-index: inherit;
+  /* keeps ie happy for mousemove events */
+  background: rgba(255, 255, 255, 0);
+}
+
+.paneRotateTabs {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -sand-transform: rotate(90deg);
+  transform-origin: bottom right;
+  -webkit-transform-origin: bottom right;
+  -ms-transform-origin: bottom right;
+  display: block;
+}
+
+.paneTabItem {
+  float: right;
+  padding: 5px 15px 0px 15px;
+  border: 1px solid #999;
+  background: #FFF;
+  cursor: pointer;
+  height: 30px;
+}
+
+.panesTabContentItem {
+  background: #FFF;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .altthemes-icon {
   background: url("../resources/img/dbl_sprites.svg") no-repeat;
@@ -223,115 +309,6 @@
   color: #fff;
   background-color: #777;
 }
-.icsmTabs {
-  position: absolute;
-  top: 0px;
-  right: 30px;
-  z-index: 1;
-}
-
-.icsmTabsOpen {
-  right: 30px;
-}
-
-.panesMapContainer {
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.icsmPanesRow {
-  height: 100%;
-  margin-right: 0;
-}
-
-.icsmPanesCol {
-  height: 100%;
-}
-
-.icsmPanesColRight {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.paneTabsMain {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  padding-top: 8px;
-  right: 0px;
-  background: #FFF;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-
-.panesTabsContainer {
-  position: absolute;
-  width: 9999px;
-  z-index: inherit;
-  /* keeps ie happy for mousemove events */
-  background: rgba(255, 255, 255, 0);
-}
-
-.paneRotateTabs {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 100%;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -sand-transform: rotate(90deg);
-  transform-origin: bottom right;
-  -webkit-transform-origin: bottom right;
-  -ms-transform-origin: bottom right;
-  display: block;
-}
-
-.paneTabItem {
-  float: right;
-  padding: 5px 15px 0px 15px;
-  border: 1px solid #999;
-  background: #FFF;
-  cursor: pointer;
-  height: 30px;
-}
-
-.panesTabContentItem {
-  background: #FFF;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.main-body {
-  position: fixed;
-  top: 85px;
-  left: 0px;
-  right: 0px;
-  bottom: 8px;
-  overflow-y: auto;
-}
-
-.point-at-box {
-  transform: rotate(-35deg);
-}
-
-@media screen and (max-width: 990px) {
-  .point-at-box {
-    transform: rotate(135deg);
-  }
-}
-
-span.mandatory {
-  content: "*";
-  color: red;
-}
 .radCore {
   margin-right: 3px;
   display: inline-block;
@@ -377,6 +354,29 @@ div.leaflet-control-scale-line {
   div.leaflet-control-scale-line {
     display: none;
   }
+}
+.main-body {
+  position: fixed;
+  top: 85px;
+  left: 0px;
+  right: 0px;
+  bottom: 8px;
+  overflow-y: auto;
+}
+
+.point-at-box {
+  transform: rotate(-35deg);
+}
+
+@media screen and (max-width: 990px) {
+  .point-at-box {
+    transform: rotate(135deg);
+  }
+}
+
+span.mandatory {
+  content: "*";
+  color: red;
 }
 .csv-label {
   display: inline-block;
