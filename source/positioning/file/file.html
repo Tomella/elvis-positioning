@@ -1,23 +1,27 @@
 <div class="container-fluid file-container" ng-controller="RootCtrl as root">
    <div class="row">
       <div class="col-md-7" style="border-right: 2px solid lightgray">
-         <h3>Purpose</h3>
-         <div style="float:right">
-            <file-drop state="root.state" />
+         <div>
+            <h3>Purpose</h3>
+            <div style="float:right; padding-left: 10px">
+               <file-drop state="root.state" />
+               <BR/>
+               <input-format list="root.data.fileUploadFormats" />
+            </div>
+            The online transformation service provided (powered by FME) provides a reference standard that
+            enables software developers and spatial professionals to transform their data from the Geocentric
+            Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). 
+            Users can simply “drag and drop” files onto the page and receive an email with a link to download the
+            output file.
+            <br/><br/>
+            Please note, this service is not intended to enable users to transform all their data from GDA94 to
+            GDA2020; instead it aims to provide a method of checking systems and processes implemented by
+            government or the spatial industry to ensure the transformation results are correct.
+            The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII,
+            GeoTiff, ECW, JPEG2000, GeoJSON
          </div>
-         The online transformation service provided (powered by FME) provides a reference standard that
-         enables software developers and spatial professionals to transform their data from the Geocentric
-         Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). 
-         Users can simply “drag and drop” files onto the page and receive an email with a link to download the
-         output file.
-         <br/><br/>
-         Please note, this service is not intended to enable users to transform all their data from GDA94 to
-         GDA2020; instead it aims to provide a method of checking systems and processes implemented by
-         government or the spatial industry to ensure the transformation results are correct.
-         The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII,
-         GeoTiff, ECW, JPEG2000, GeoJSON
 
-         <h3>Choice of Transformation Grid</h3>
+         <h3 style="clear:both">Choice of Transformation Grid</h3>
          Two different transformation grids are provided for you to choose from:
          <ul>
             <li>Conformal</li>
@@ -42,7 +46,6 @@
          should be used to transform to GDA2020 coordinates. If in doubt, contact your state or territory land
          survey authority.
          <br/>
-         <input-format list="root.data.fileUploadFormats" />
       </div>
       <div class="col-md-5" >
          <upload-dialog state="root.state" settings="root.data"/>

@@ -28,45 +28,6 @@
 .common-header {
   background-color: white;
 }
-.iso19115,
-.iso19115 ul,
-.iso19115 li {
-  position: relative;
-}
-
-.iso19115 ul {
-  list-style: none;
-  padding-left: 32px;
-}
-
-.iso19115 li::before,
-.iso19115 li::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-}
-
-.iso19115 li::before {
-  border-top: 1px solid #000;
-  top: 9px;
-  width: 8px;
-  height: 0;
-}
-
-.iso19115 li::after {
-  border-left: 1px solid #000;
-  height: 100%;
-  width: 0px;
-  top: 2px;
-}
-
-.iso19115 ul > li:last-child::after {
-  height: 8px;
-}
-
-.iso19115-head {
-  font-weight: bold;
-}
 .mvt,
 .mvt ul,
 .mvt li {
@@ -110,6 +71,45 @@
 .metaview-info {
   padding-left: 3px;
   padding-right: 3px;
+}
+.iso19115,
+.iso19115 ul,
+.iso19115 li {
+  position: relative;
+}
+
+.iso19115 ul {
+  list-style: none;
+  padding-left: 32px;
+}
+
+.iso19115 li::before,
+.iso19115 li::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+.iso19115 li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+.iso19115 li::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+.iso19115 ul > li:last-child::after {
+  height: 8px;
+}
+
+.iso19115-head {
+  font-weight: bold;
 }
 .altthemes-icon {
   background: url("../resources/img/dbl_sprites.svg") no-repeat;
@@ -309,29 +309,6 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-.main-body {
-  position: fixed;
-  top: 85px;
-  left: 0px;
-  right: 0px;
-  bottom: 8px;
-  overflow-y: auto;
-}
-
-.point-at-box {
-  transform: rotate(-35deg);
-}
-
-@media screen and (max-width: 990px) {
-  .point-at-box {
-    transform: rotate(135deg);
-  }
-}
-
-span.mandatory {
-  content: "*";
-  color: red;
-}
 .radCore {
   margin-right: 3px;
   display: inline-block;
@@ -378,6 +355,29 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
+.main-body {
+  position: fixed;
+  top: 85px;
+  left: 0px;
+  right: 0px;
+  bottom: 8px;
+  overflow-y: auto;
+}
+
+.point-at-box {
+  transform: rotate(-35deg);
+}
+
+@media screen and (max-width: 990px) {
+  .point-at-box {
+    transform: rotate(135deg);
+  }
+}
+
+span.mandatory {
+  content: "*";
+  color: red;
+}
 .csv-label {
   display: inline-block;
   max-width: 100%;
@@ -400,19 +400,12 @@ div.leaflet-control-scale-line {
   padding: 5px;
   border-radius: 4px;
 }
-.hide {
-  display: none;
-}
-
-.file-container {
-  margin-top: 0;
-}
 #fileDrop {
   font-weight: bold;
   font-size: 200%;
   line-height: 2;
-  height: 285px;
-  width: 350px;
+  height: 250px;
+  width: 100%;
   z-index: 1;
   background-color: #eeeeee;
   text-align: center;
@@ -421,6 +414,13 @@ div.leaflet-control-scale-line {
   padding-left: 5px;
   padding-right: 5px;
   margin: auto;
+}
+.hide {
+  display: none;
+}
+
+.file-container {
+  margin-top: 0;
 }
 .input-format-pill {
   font-size: 110%;
