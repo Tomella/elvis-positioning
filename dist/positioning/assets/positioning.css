@@ -378,6 +378,17 @@ span.mandatory {
   content: "*";
   color: red;
 }
+.upload-dialog p {
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.ud-info {
+  background-color: #d9edf7;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 4px;
+}
 .csv-label {
   display: inline-block;
   max-width: 100%;
@@ -389,16 +400,12 @@ span.mandatory {
   width: 10em;
   text-align: right;
 }
-.upload-dialog p {
-  padding: 15px;
-  margin-top: 10px;
+.hide {
+  display: none;
 }
 
-.ud-info {
-  background-color: #d9edf7;
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 4px;
+.file-container {
+  margin-top: 0;
 }
 #fileDrop {
   font-weight: bold;
@@ -415,18 +422,6 @@ span.mandatory {
   padding-left: 5px;
   padding-right: 5px;
   margin: auto;
-}
-.hide {
-  display: none;
-}
-
-.file-container {
-  margin-top: 0;
-}
-.input-format-pill {
-  font-size: 110%;
-  padding: 4px;
-  margin: 5px;
 }
 .nav-icons {
   margin-top: 7px !important;
@@ -457,6 +452,11 @@ span.mandatory {
 
 .common-header {
   background-color: white;
+}
+.input-format-pill {
+  font-size: 110%;
+  padding: 4px;
+  margin: 5px;
 }
 .ed-valid {
   color: green;
