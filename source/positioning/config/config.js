@@ -63,62 +63,6 @@
          {
             key: 'GDA94_to_GDA2020_DC',
             value: 'Conformal and Distortion'
-         },
-         {
-            key: 'GDA94_to_GDA2020_NSW_C',
-            value: 'GDA94 to GDA2020 NSW C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_NT_C',
-            value: 'GDA94 to GDA2020 NT C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_QLD_C',
-            value: 'GDA94 to GDA2020 QLD C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_SA_C',
-            value: 'GDA94 to GDA2020 SA C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_TAS_C',
-            value: 'GDA94 to GDA2020 TAS C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_VIC_C',
-            value: 'GDA94 to GDA2020 VIC C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_WA_C',
-            value: 'GDA94 to GDA2020 WA C'
-         },
-         {
-            key: 'GDA94_to_GDA2020_NSW_DC',
-            value: 'GDA94 to GDA2020 NSW DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_NT_DC',
-            value: 'GDA94 to GDA2020 NT DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_QLD_DC',
-            value: 'GDA94 to GDA2020 QLD DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_SA_DC',
-            value: 'GDA94 to GDA2020 SA DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_TAS_DC',
-            value: 'GDA94 to GDA2020 TAS DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_VIC_DC',
-            value: 'GDA94 to GDA2020 VIC DC'
-         },
-         {
-            key: 'GDA94_to_GDA2020_WA_DC',
-            value: 'GDA94 to GDA2020 WA DC'
          }
       ]
    };
