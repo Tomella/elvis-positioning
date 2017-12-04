@@ -1,15 +1,21 @@
-<div>
-   <div class="row">
-      <div class="col-md-6">
-         <label for="csvElevation">
-				   Please choose a transformation grid: <mandatory />
-   			</label>
-      </div>
-      <div class="col-md-6" style="text-align: right">
+<div class="row">
+   <div class="col-md-12">
+      <span style="font-weight:bold">
+         Please choose a transformation grid:
+         <mandatory />
+      </span>
+      <span style="text-align: right" ng-if="transformations.length > 2">
          <select id="transformation" ng-model="state.transformation">
-               <option ng-selected="true" value=""></option>
-               <option ng-repeat="option in transformations" value="{{option.key}}">{{option.value}}</option>
-            </select>
-      </div>
+            <option ng-selected="true" value=""></option>
+            <option ng-repeat="option in transformations" value="{{option.key}}">{{option.value}}</option>
+         </select>
+      </span>
+      <span style="float: right" ng-if="transformations.length === 2">
+         <input type="radio" ng-model="state.transformation" ng-value="transformations[0].key" id="radio1">
+         <label for="radio1">{{transformations[0].value}}</label>
+         <span style="padding-right: 10px"></span>
+         <input type="radio" ng-model="state.transformation" ng-value="transformations[1].key" id="radio2">
+         <label for="radio2">{{transformations[1].value}}</label>
+      </span>
    </div>
 </div>
