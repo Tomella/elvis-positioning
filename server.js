@@ -110,6 +110,8 @@ app.get('/refreshToken', function(req, res) {
    });
 });
 
+/*
+
 app.get('/token', function(req, res) {
    token.value.then((data) => {
       res.header({
@@ -118,7 +120,7 @@ app.get('/token', function(req, res) {
       res.status(200).send(data);
    });
 });
-
+*/
 
 app.listen(port, function (err) {
     console.log("running server on port " + port);
