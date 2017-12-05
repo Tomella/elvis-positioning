@@ -1,4 +1,8 @@
 class State {
+   clear() {
+      this.extension = this.file = this.outputName = this.fileMap = this.type = this.files = this.isEpsg4283 = this.dmsType = null;
+   }
+
    get isCsv() {
       return this.extension === 'csv';
    }

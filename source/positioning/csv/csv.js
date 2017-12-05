@@ -20,7 +20,11 @@
                   if (buffer.length) {
                      // We don't read the whole file, just the start.
                      let lines = buffer.substr(0, buffer.lastIndexOf("\n"));
-                     resolve(CSVToArray(lines));
+                     if(!lines) {
+                        reject(buffer);
+                     } else {
+                        resolve(CSVToArray(lines));
+                     }
                   } else {
                      reject(buffer);
                   }
@@ -33,7 +37,7 @@
 
    angular.module("positioning.csv", [])
 
-      .directive("csvFile", ["csvService", function (csvService) {
+      .directive("csvFile", ["csvService", "messageService", function (csvService, messageService) {
          return {
             templateUrl: "positioning/csv/csv.html",
             scope: {
@@ -44,6 +48,9 @@
                scope.state.dmsType = "deg";
                csvService.getColumns(scope.state.file).then(csv => {
                   scope.columns = csv[0];
+               }).catch(() => {
+                  messageService.error("Only CSV files with the first line containing column names are acceptable for transformation");
+                  scope.state.clear();
                });
             }
          };

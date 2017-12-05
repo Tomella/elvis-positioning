@@ -9,3 +9,9 @@
    width: 10em;
    text-align: right;
 }
+
+@media screen and (max-width: 1350px) {
+   .csv-verbose {
+     display:none;
+   }
+}

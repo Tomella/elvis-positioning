@@ -721,6 +721,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(angular);
 "use strict";
 
+{
+   angular.module("common.proxy", []).provider("proxy", function () {
+
+      this.$get = ['$http', '$q', function ($http, $q) {
+         var base = "proxy/";
+
+         this.setProxyBase = function (newBase) {
+            base = newBase;
+         };
+
+         return {
+            get: function get(url, options) {
+               return this._method("get", url, options);
+            },
+
+            post: function post(url, options) {
+               return this._method("post", url, options);
+            },
+
+            put: function put(url, options) {
+               return this._method("put", url, options);
+            },
+
+            _method: function _method(method, url, options) {
+               return $http[method](base + url, options).then(function (response) {
+                  return response.data;
+               });
+            }
+         };
+      }];
+   });
+}
+"use strict";
+
 (function (angular) {
 	'use strict';
 
@@ -843,40 +877,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
   }]);
 })(angular);
-"use strict";
-
-{
-   angular.module("common.proxy", []).provider("proxy", function () {
-
-      this.$get = ['$http', '$q', function ($http, $q) {
-         var base = "proxy/";
-
-         this.setProxyBase = function (newBase) {
-            base = newBase;
-         };
-
-         return {
-            get: function get(url, options) {
-               return this._method("get", url, options);
-            },
-
-            post: function post(url, options) {
-               return this._method("post", url, options);
-            },
-
-            put: function put(url, options) {
-               return this._method("put", url, options);
-            },
-
-            _method: function _method(method, url, options) {
-               return $http[method](base + url, options).then(function (response) {
-                  return response.data;
-               });
-            }
-         };
-      }];
-   });
-}
 "use strict";
 
 (function (angular) {

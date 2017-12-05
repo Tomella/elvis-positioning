@@ -16,3 +16,15 @@
 .transform-selected {
    color: green;
 }
+
+@media screen and (max-width: 1350px) {
+   .transform-verbose {
+      display: none;
+   }
+}
+
+@media screen and (min-width: 1350px) {
+   .transform-succinct {
+      display: none;
+   }
+}
