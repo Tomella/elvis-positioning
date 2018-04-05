@@ -378,23 +378,6 @@ span.mandatory {
   content: "*";
   color: red;
 }
-.csv-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.csv-fix-label label {
-  width: 10em;
-  text-align: right;
-}
-
-@media screen and (max-width: 1350px) {
-  .csv-verbose {
-    display: none;
-  }
-}
 .upload-dialog p {
   padding: 15px;
   margin-top: 10px;
@@ -423,6 +406,23 @@ span.mandatory {
 
 @media screen and (min-width: 1350px) {
   .transform-succinct {
+    display: none;
+  }
+}
+.csv-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.csv-fix-label label {
+  width: 10em;
+  text-align: right;
+}
+
+@media screen and (max-width: 1350px) {
+  .csv-verbose {
     display: none;
   }
 }
