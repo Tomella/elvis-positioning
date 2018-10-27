@@ -9,46 +9,34 @@
                </div>
                <input-format list="root.data.fileUploadFormats" />
             </div>
-            The online transformation service (powered by FME) provides a reference standard that
-            enables software developers and spatial professionals to transform their data from the Geocentric
-            Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). 
-            Users can simply “drag and drop” files onto the page and receive an email with a link to download the
-            output file.
+            The online transformation service (powered by FME) provides a reference standard that enables software developers and spatial professionals to transform their data from the Geocentric Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). Users can simply drag and drop files onto the page and receive an email with a link to download the output file.
             <br/><br/>
-            Please note, this service is not intended to enable users to transform all their data from GDA94 to
-            GDA2020; instead it aims to provide a method of checking systems and processes implemented by
-            government or the spatial industry to ensure the transformation results are correct.
-            The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII Grid,
-            GeoTiff, ECW, JPEG2000, GeoJSON
+            Please note, this service is not intended to enable users to transform all their data from GDA94 to GDA2020; instead it aims to provide a method of checking systems and processes implemented by government or the spatial industry to ensure the transformation results are correct. The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII Grid, GeoTiff, ECW, JPEG2000, GeoJSON.
          </div>
 
-         <h3 style="clear:both">Choice of Transformation Grid</h3>
-         Two different transformation grids are provided for you to choose from:
+         <h3 style="clear:both">Choice of Transformation</h3>
+         Three different transformations  are provided for you to choose from:
          <ul>
+            <li>7-parameter similarity</li>
             <li>Conformal</li>
             <li>Conformal and Distortion</li>
          </ul>
-         <strong>Conformal grid:</strong> predominantly plate tectonic motion (~1.7 m NNE) and replicates a seven-parameter
-         similarity transformation.
-         <br/>
-         <i>NOTE: If GDA94 coordinates were observed using Global Navigation Satellite System (GNSS)
-         technology, with corrections coming from a network of GNSS reference stations (such as GPSnet,
-         CORSnet-NSW), it is likely that the coordinates will be unaffected by local distortions. In this case, the
-         Conformal grid or a seven-parameter similarity transformation would be most suitable to transform the
-         GDA94 coordinates to GDA2020.</i>
-         <br/>
-         <br/>
-         <strong>Conformal and Distortion grid:</strong> plate tectonic motion and regional distortion caused by an improved
-         realisation of the global reference frame over time; irregular ground movement since GDA94 was
-         established; and improvements in computation methods since GDA94. These effects vary in magnitude
-         and direction around the country and can be as large as ~0.5 m.
-         <br/>
-         <i>NOTE: If survey control marks were used for referencing and/or establishing GDA94 coordinates,
-         localised distortion will need to be taken into account. In this case, the Conformal and Distortion grid
-         should be used to transform to GDA2020 coordinates. If in doubt, contact your state or territory land
-         survey authority.</i>
 
+         <strong>7-parameter similarity:</strong> predominantly plate motion (~1.7 m NNE). It can be applied to 3-dimensional data, where horizontal coordinates are provided in latitudes and longitudes and the vertical values are ellipsoidal heights. AHD heights first need to be transformed to ellipsoidal heights using AUSGeoid2020. The 7-parameter similarity transformation is available for all locations within the GDA2020 extent (Australia, Cocos (Keeling) Islands, Christmas Island, Lord Howe Island, Norfolk Island and Macquarie Island and their maritime zones).
          <br/>
+         <br/>
+
+         <strong>Conformal grid:</strong> predominantly plate tectonic motion (~1.7 m NNE) and replicates a 7-parameter similarity transformation. Heights are not transformed. Conformal grid transformations are only available for Australia and offshore areas.
+         <br/>
+         <i>NOTE: If GDA94 coordinates were observed using Global Navigation Satellite System (GNSS) technology, with corrections coming from a network of GNSS reference stations (such as GPSnet, CORSnet-NSW), it is likely that the coordinates will be unaffected by local distortions. In this case, the Conformal grid or a seven-parameter similarity transformation would be most suitable to transform the GDA94 coordinates to GDA2020.</i>
+         <br/>
+         <br/>
+         <strong>Conformal and Distortion grid:</strong> plate tectonic motion and regional distortion caused by an improved realisation of the global reference frame over time; irregular ground movement since GDA94 was established; and improvements in computation methods since GDA94. These effects vary in magnitude and direction around the country and can be as large as ~0.5 m. Heights are not transformed. Conformal and Distortion grid transformations are only available for Australia and offshore areas.
+         <br/>
+         <i>NOTE: If survey control marks were used for referencing and/or establishing GDA94 coordinates, localised distortion will need to be taken into account. In this case, the Conformal and Distortion grid should be used to transform to GDA2020 coordinates. If in doubt, contact your state or territory land survey authority.</i>
+         <br/>
+
+         For comprehensive information on GDA94 to GDA2020 transformation, please refer to the <a href="http://icsm.gov.au/datum/gda2020-and-gda94-technical-manuals" target="_blank">ICSM GDA2020 Technical Manual</a> or <a href="http://icsm.gov.au/datum/gda2020-fact-sheets" target="_blank">GDA2020 Fact Sheets</a>
       </div>
       <div class="col-md-5" >
          <upload-dialog state="root.state" settings="root.data"/>

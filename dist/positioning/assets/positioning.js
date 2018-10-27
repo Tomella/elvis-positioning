@@ -303,57 +303,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }
 "use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-{
-   var EmailService = function () {
-      function EmailService(persistService) {
-         _classCallCheck(this, EmailService);
-
-         this.persistService = persistService;
-         this.key = "download_email";
-      }
-
-      _createClass(EmailService, [{
-         key: "setEmail",
-         value: function setEmail(email) {
-            this.persistService.setItem(this.key, email);
-         }
-      }, {
-         key: "getEmail",
-         value: function getEmail() {
-            return this.persistService.getItem(this.key);
-         }
-      }]);
-
-      return EmailService;
-   }();
-
-   EmailService.$invoke = ["persistService"];
-
-   angular.module("positioning.email", []).directive("email", ["emailService", function (emailService) {
-      return {
-         template: '<div class="input-group">' + '<span class="input-group-addon" id="pos-email">Email</span>' + '<input required="required" type="email" ng-change="changeEmail(state.email)" ng-model="state.email" class="form-control" placeholder="Email address to send download link" aria-describedby="nedf-email">' + '</div>',
-         restrict: "AE",
-         scope: {
-            state: "="
-         },
-         link: function link(scope, element) {
-            emailService.getEmail().then(function (email) {
-               scope.state.email = email;
-            });
-
-            scope.changeEmail = function (email) {
-               emailService.setEmail(email);
-            };
-         }
-      };
-   }]).service("emailService", EmailService);
-}
-"use strict";
-
 {
    angular.module("positioning.filedrop", []).directive("fileDrop", ["messageService", function (messageService) {
       return {
@@ -448,6 +397,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }
 "use strict";
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+{
+   var EmailService = function () {
+      function EmailService(persistService) {
+         _classCallCheck(this, EmailService);
+
+         this.persistService = persistService;
+         this.key = "download_email";
+      }
+
+      _createClass(EmailService, [{
+         key: "setEmail",
+         value: function setEmail(email) {
+            this.persistService.setItem(this.key, email);
+         }
+      }, {
+         key: "getEmail",
+         value: function getEmail() {
+            return this.persistService.getItem(this.key);
+         }
+      }]);
+
+      return EmailService;
+   }();
+
+   EmailService.$invoke = ["persistService"];
+
+   angular.module("positioning.email", []).directive("email", ["emailService", function (emailService) {
+      return {
+         template: '<div class="input-group">' + '<span class="input-group-addon" id="pos-email">Email</span>' + '<input required="required" type="email" ng-change="changeEmail(state.email)" ng-model="state.email" class="form-control" placeholder="Email address to send download link" aria-describedby="nedf-email">' + '</div>',
+         restrict: "AE",
+         scope: {
+            state: "="
+         },
+         link: function link(scope, element) {
+            emailService.getEmail().then(function (email) {
+               scope.state.email = email;
+            });
+
+            scope.changeEmail = function (email) {
+               emailService.setEmail(email);
+            };
+         }
+      };
+   }]).service("emailService", EmailService);
+}
+"use strict";
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 {
@@ -464,6 +464,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 "use strict";
 
 {
+   angular.module("positioning.format", []).directive("inputFormat", function () {
+      return {
+         scope: {
+            list: "="
+         },
+         templateUrl: "positioning/formats/formats.html"
+      };
+   });
+}
+"use strict";
+
+{
    angular.module("positioning.filename", []).directive("filename", [function () {
       return {
          scope: {
@@ -476,12 +488,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 "use strict";
 
 {
-   angular.module("positioning.format", []).directive("inputFormat", function () {
+   angular.module("positioning.output", []).directive("outputFormat", function () {
       return {
-         scope: {
-            list: "="
+         link: {
+            state: "="
          },
-         templateUrl: "positioning/formats/formats.html"
+         templateUrl: 'positioning/output/output.html'
       };
    });
 }
@@ -626,18 +638,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }
 "use strict";
 
-{
-   angular.module("positioning.output", []).directive("outputFormat", function () {
-      return {
-         link: {
-            state: "="
-         },
-         templateUrl: 'positioning/output/output.html'
-      };
-   });
-}
-"use strict";
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 {
@@ -766,6 +766,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    SubmitService.$inject = ["$http", "$q", "configService"];
 
    angular.module("positioning.submit", []).service("submitService", SubmitService);
+}
+"use strict";
+
+{
+   angular.module("positioning.mandatory", []).directive("mandatory", function () {
+      return {
+         template: '<span class="mandatory" title="You must provide a value">*</span>'
+      };
+   });
 }
 "use strict";
 
@@ -1146,27 +1155,18 @@ var State = function () {
 
    return State;
 }();
-"use strict";
-
-{
-   angular.module("positioning.mandatory", []).directive("mandatory", function () {
-      return {
-         template: '<span class="mandatory" title="You must provide a value">*</span>'
-      };
-   });
-}
 angular.module("positioning.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("positioning/csv/csv.html","<div>\r\n  <h4>A few questions about your CSV file named \"{{state.file.name}}\"</h4>\r\n  <div>\r\n      <div class=\"row\">\r\n         <div class=\"col-md-12\">\r\n            <span class=\"csv-label\">\r\n               Lat/lng fields are in<mandatory />\r\n            </span>\r\n            <span class=\"pull-right\">\r\n               <label for=\"csvDegrees\">\r\n                  Decimal degrees <span class=\"csv-verbose\">(2 cols)</span>\r\n				   </label>\r\n               <input name=\"csvDegrees\" type=\"radio\" value=\"deg\" ng-model=\"state.dmsType\" />\r\n               or\r\n				   <label for=\"csvDms\">\r\n                  Degrees/minutes/seconds <span class=\"csv-verbose\">(6 cols)</span>\r\n				   </label>\r\n               <input name=\"csvDms\" type=\"radio\" value=\"dms\" ng-model=\"state.dmsType\" />\r\n            </span>\r\n			</div>\r\n      </div>\r\n\r\n      <div class=\"row\" ng-if=\"state.dmsType == \'deg\'\">\r\n			<div class=\"col-md-3 csv-label\">\r\n				Columns\r\n			</div>\r\n			<div class=\"col-md-9\">\r\n            <div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLatDecDegrees\" style=\"width:9em\">\r\n                  Latitude<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLatDecDegrees\" ng-model=\"state.latDegreesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n				<div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLngDecDegrees\" style=\"width:9em\">\r\n                  Longitude<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLngDecDegrees\" ng-model=\"state.lngDegreesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n				</div>\r\n			</div>\r\n      </div>\r\n\r\n      <div class=\"row\" ng-if=\"state.dmsType == \'dms\'\">\r\n			<div class=\"col-md-3 csv-label\">\r\n				Columns\r\n			</div>\r\n			<div class=\"col-md-9 csv-fix-label\">\r\n            <div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLatDegrees\">\r\n                  Latitude Degrees<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLatDegrees\" ng-model=\"state.latDegreesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n            <div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLatMinutes\">\r\n                  Minutes<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLatMinutes\" ng-model=\"state.latMinutesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n            <div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLatSeconds\">\r\n                  Seconds<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLatSeconds\" ng-model=\"state.latSecondsCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n            <div style=\"text-align: right\">\r\n   			   <label for=\"csvSelectLngDegrees\">\r\n                  Longitude Degrees<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLngDegrees\" ng-model=\"state.lngDegreesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n				<div style=\"text-align: right\">\r\n               <label for=\"csvSelectLngMinutes\">\r\n                  Minutes<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLngMinutes\" ng-model=\"state.lngMinutesCol\"\r\n                     ng-options=\"o as o for o in columns\"></select>\r\n            </div>\r\n            <div style=\"text-align: right\">\r\n				   <label for=\"csvSelectLngSeconds\">\r\n                  Seconds<mandatory />\r\n				   </label>\r\n               <select id=\"csvSelectLngSeconds\" ng-model=\"state.lngSecondsCol\"\r\n                     ng-options=\"o as o for o in columns\">\r\n               </select>\r\n            </div>\r\n			</div>\r\n      </div>\r\n  </div>\r\n</div>");
 $templateCache.put("positioning/dialog/dialog.html","<div class=\"upload-dialog\">\r\n   <div class=\"ud-info\" ng-if=\"!state.file\">\r\n      <div style=\"font-weight: bold\">\r\n         <i class=\"fa fa-hand-o-left point-at-box fa-2x\" aria-hidden=\"true\" style=\"padding-right:12px;\"></i>\r\n         Select and drop file(s) for reprojection\r\n      </div>\r\n      <br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">CSV -</span>\r\n         Drop a single CSV file with field names in the first row and a \".csv\" extension and we will scan for columns and ask follow up questions.\r\n      </div>\r\n      </br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">Shapefile -</span>\r\n         Drop at least three files with the same file prefix to transform a shapefile:\r\n         <ul>\r\n            <li>\".shp\" — shape format; the feature geometry itself.</li>\r\n            <li>\".shx\" — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly.</li>\r\n            <li>\".dbf\" — attribute format; columnar attributes for each shape, in dBase IV format.</li>\r\n            <li><i>\".prj\" — OPTIONAL — projection; describes the coordinate system and projection information used.</i></li>\r\n         </ul>\r\n      </div>\r\n      <div>\r\n         <span style=\"font-weight: bold\">JPEG2000 -</span>\r\n         Drop a single JPEG2000 file with a \".j2\", \".j2k\", \".jpx\", \".jpf\", \".jpm\", \".jpp\", \".jp2000\" or \".jp2k\" extension and we will process this as a JPEG2000 file.\r\n      </div>\r\n      </br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">GeoJSON -</span>\r\n         Drop a single GeoJSON file with a \".json\" extension and we will process this as a GeoJSON file.\r\n      </div>\r\n      </br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">GeoTIFF -</span>\r\n         Drop a single GeoTIFF file with a \".tif\" extension and we will process this as a GeoTIFF file.\r\n      </div>\r\n      </br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">ASCII Grid -</span>\r\n         Drop a single ASCII Grid file with an \".asc\" extension and we will process this as a ASCII Grid file.\r\n      </div>\r\n      </br/>\r\n      <div>\r\n         <span style=\"font-weight: bold\">ECW -</span>\r\n         Drop a single ECW file with an \".ecw\" extension and we will process this as a ECW file.\r\n      </div>\r\n   </div>\r\n\r\n   <div ng-if=\"state.file && state.extension == \'csv\'\">\r\n      <h3>Selected {{state.file.name}} ({{state.file.size | bytes}})</h3>\r\n   </div>\r\n   <div style=\"text-align:right\" ng-if=\"state.file.size > settings.maxFileSize\">\r\n      The size of the file to be uploaded must not exceed {{settings.maxFileSize | bytes}}. Please select a smaller file.\r\n      <button type=\"button\" class=\"btn btn-primary\" ng-click=\"cancel()\">OK</button>\r\n   </div>\r\n   <hr />\r\n   <div ng-show=\"state.file\">\r\n      <div ng-if=\"state.extension == \'csv\' && state.file.size < settings.maxFileSize\">\r\n         <csv-file state=\"state\" settings=\"settings\" />\r\n      </div>\r\n      <div ng-if=\"state.extension == \'shp\'\">\r\n         <shp-file state=\"state\" settings=\"settings\" />\r\n      </div>\r\n      <div ng-if=\"state.type == \'single\'\">\r\n         <h4>A few questions about your file named \"{{state.file.name}}\"</h4>\r\n      </div>\r\n      <transformation-target state=\"state\"></transformation-target>\r\n      <accept-epsg4283 state=\"state\"></accept-epsg4283>\r\n   </div>\r\n   <div ng-show=\"state.file\">\r\n      <div>\r\n         <h4>Nominate your notification email address<mandatory /></h4>\r\n         <email state=\"state\" ng-if=\"state\" />\r\n      </div>\r\n\r\n      <div style=\"padding-top: 10px\">\r\n         <progress-bar-single state=\"state\" ng-show=\"state.type == \'single\'\"/>\r\n         <progress-bar-csv state=\"state\" ng-show=\"state.extension == \'csv\'\"/>\r\n         <progress-bar-shapefile state=\"state\" ng-show=\"state.extension == \'shp\'\" />\r\n      </div>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/dialog/isepsg4283.html","<div>\r\n   <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n         <label for=\"isEpsg4283\">\r\n					The data is in <a target=\"_blank\" href=\"http://spatialreference.org/ref/epsg/4283/\">EPSG:4283</a> projection <mandatory />\r\n			</label>\r\n      </div>\r\n      <div class=\"col-md-6\" style=\"text-align:right\">\r\n         <button id=\"isEpsg4283\" type=\"button\" title=\"The data must be in the EPSG:4283 projection to be transformed correctly.\"\r\n               class=\"btn btn-default btn-xs\" ng-click=\"state.isEpsg4283 = !state.isEpsg4283\">\r\n            <i class=\"fa\" style=\"width:12px;height:12px;color:green\" ng-class=\"{\'fa-check\':state.isEpsg4283}\" aria-hidden=\"true\"></i>\r\n         </button>\r\n      </div>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/dialog/submit.html","<div style=\"padding-bottom:2px\">\r\n   <div class=\"row\">\r\n      <div class=\"col-md-6\" style=\"padding-top:7px\">\r\n         <div class=\"progress\">\r\n            <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{state.percentComplete}}\" aria-valuemin=\"0\" aria-valuemax=\"100\"\r\n                  style=\"width: {{state.percentComplete}}%;\">\r\n                <span class=\"sr-only\">60% Complete</span>\r\n            </div>\r\n         </div>\r\n      </div>\r\n      <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Select a valid coordinate system.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-crosshairs fa-2x\" ng-class=\"{\'ed-valid\': state.validProjection, \'ed-invalid\': !state.validProjection }\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Select a latitude and longitude columns.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-arrows fa-2x\" ng-class=\"{\'ed-valid\': state.validFields, \'ed-invalid\': !state.validFields}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Select a valid download format.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-files-o fa-2x\" ng-class=\"{\'ed-valid\': state.validFormat, \'ed-invalid\': !state.validFormat}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Provide an email address.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-envelope fa-2x\" ng-class=\"{\'ed-valid\': state.validEmail, \'ed-invalid\': !state.validEmail}\"></i>\r\n         </span>\r\n      </div>\r\n      <div class=\"col-md-2\">\r\n         <button type=\"button\" class=\"btn btn-primary\" ng-click=\"cancel()\">Cancel</button>\r\n         <button type=\"button\" ng-disabled=\"!state.ready\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/dialog/transformationtarget.html","<div class=\"row\">\r\n   <div class=\"col-md-12\">\r\n      <span style=\"font-weight:bold\">\r\n         <span class=\"transform-verbose\">Please choose a transformation grid:</span>\r\n         <span class=\"transform-succinct\">Transformation grid:</span>\r\n         <mandatory />\r\n      </span>\r\n      <span style=\"text-align: right\" ng-if=\"transformations.length > 2\">\r\n         <select id=\"transformation\" ng-model=\"state.transformation\">\r\n            <option ng-selected=\"true\" value=\"\"></option>\r\n            <option ng-repeat=\"option in transformations\" value=\"{{option.key}}\">{{option.value}}</option>\r\n         </select>\r\n      </span>\r\n      <span style=\"float: right\" ng-if=\"transformations.length === 2\">\r\n         <input type=\"radio\" ng-model=\"state.transformation\" ng-value=\"transformations[0].key\" id=\"radio1\">\r\n         <label for=\"radio1\">{{transformations[0].value}}</label>\r\n         <span style=\"padding-right: 10px\"></span>\r\n         <input type=\"radio\" ng-model=\"state.transformation\" ng-value=\"transformations[1].key\" id=\"radio2\">\r\n         <label for=\"radio2\">{{transformations[1].value}}</label>\r\n      </span>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/filedrop/filedrop.html","<div id=\"fileDrop\" title=\"Drop the files you would like to reproject to GDA2020\">\r\n   <br/> Drop <br/> File(s) <br/> Here\r\n</div>");
-$templateCache.put("positioning/file/file.html","<div class=\"container-fluid file-container\" ng-controller=\"RootCtrl as root\">\r\n   <div class=\"row\">\r\n      <div class=\"col-md-7\" style=\"border-right: 2px solid lightgray\">\r\n         <div>\r\n            <h3 style=\"margin-top:10px\">Purpose</h3>\r\n            <div style=\"float:right; padding-left: 10px\">\r\n               <div style=\"padding-bottom:5px\">\r\n                  <file-drop state=\"root.state\" />\r\n               </div>\r\n               <input-format list=\"root.data.fileUploadFormats\" />\r\n            </div>\r\n            The online transformation service (powered by FME) provides a reference standard that\r\n            enables software developers and spatial professionals to transform their data from the Geocentric\r\n            Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). \r\n            Users can simply “drag and drop” files onto the page and receive an email with a link to download the\r\n            output file.\r\n            <br/><br/>\r\n            Please note, this service is not intended to enable users to transform all their data from GDA94 to\r\n            GDA2020; instead it aims to provide a method of checking systems and processes implemented by\r\n            government or the spatial industry to ensure the transformation results are correct.\r\n            The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII Grid,\r\n            GeoTiff, ECW, JPEG2000, GeoJSON\r\n         </div>\r\n\r\n         <h3 style=\"clear:both\">Choice of Transformation Grid</h3>\r\n         Two different transformation grids are provided for you to choose from:\r\n         <ul>\r\n            <li>Conformal</li>\r\n            <li>Conformal and Distortion</li>\r\n         </ul>\r\n         <strong>Conformal grid:</strong> predominantly plate tectonic motion (~1.7 m NNE) and replicates a seven-parameter\r\n         similarity transformation.\r\n         <br/>\r\n         <i>NOTE: If GDA94 coordinates were observed using Global Navigation Satellite System (GNSS)\r\n         technology, with corrections coming from a network of GNSS reference stations (such as GPSnet,\r\n         CORSnet-NSW), it is likely that the coordinates will be unaffected by local distortions. In this case, the\r\n         Conformal grid or a seven-parameter similarity transformation would be most suitable to transform the\r\n         GDA94 coordinates to GDA2020.</i>\r\n         <br/>\r\n         <br/>\r\n         <strong>Conformal and Distortion grid:</strong> plate tectonic motion and regional distortion caused by an improved\r\n         realisation of the global reference frame over time; irregular ground movement since GDA94 was\r\n         established; and improvements in computation methods since GDA94. These effects vary in magnitude\r\n         and direction around the country and can be as large as ~0.5 m.\r\n         <br/>\r\n         <i>NOTE: If survey control marks were used for referencing and/or establishing GDA94 coordinates,\r\n         localised distortion will need to be taken into account. In this case, the Conformal and Distortion grid\r\n         should be used to transform to GDA2020 coordinates. If in doubt, contact your state or territory land\r\n         survey authority.</i>\r\n\r\n         <br/>\r\n      </div>\r\n      <div class=\"col-md-5\" >\r\n         <upload-dialog state=\"root.state\" settings=\"root.data\"/>\r\n      </div>\r\n   </div>\r\n</div>");
-$templateCache.put("positioning/filename/filename.html","<div class=\"input-group\">\r\n   <span class=\"input-group-addon\" id=\"nedf-filename\">Filename</span>\r\n   <input type=\"text\" ng-maxlength=\"30\" ng-trim=\"true\" ng-keypress=\"restrict($event)\"\r\n         ng-model=\"state.outputName\" class=\"form-control\"\r\n         placeholder=\"Filename\" aria-describedby=\"pos-filename\" />\r\n   <span class=\"input-group-addon\" id=\"basic-addon2\">.zip</span>\r\n</div>");
+$templateCache.put("positioning/file/file.html","<div class=\"container-fluid file-container\" ng-controller=\"RootCtrl as root\">\r\n   <div class=\"row\">\r\n      <div class=\"col-md-7\" style=\"border-right: 2px solid lightgray\">\r\n         <div>\r\n            <h3 style=\"margin-top:10px\">Purpose</h3>\r\n            <div style=\"float:right; padding-left: 10px\">\r\n               <div style=\"padding-bottom:5px\">\r\n                  <file-drop state=\"root.state\" />\r\n               </div>\r\n               <input-format list=\"root.data.fileUploadFormats\" />\r\n            </div>\r\n            The online transformation service (powered by FME) provides a reference standard that enables software developers and spatial professionals to transform their data from the Geocentric Datum of Australia 1994 (GDA94) to the Geocentric Datum of Australia 2020 (GDA2020). Users can simply drag and drop files onto the page and receive an email with a link to download the output file.\r\n            <br/><br/>\r\n            Please note, this service is not intended to enable users to transform all their data from GDA94 to GDA2020; instead it aims to provide a method of checking systems and processes implemented by government or the spatial industry to ensure the transformation results are correct. The online transformation service accepts the following formats at this time: Shapefiles, CSV, ASCII Grid, GeoTiff, ECW, JPEG2000, GeoJSON.\r\n         </div>\r\n\r\n         <h3 style=\"clear:both\">Choice of Transformation</h3>\r\n         Three different transformations  are provided for you to choose from:\r\n         <ul>\r\n            <li>7-parameter similarity</li>\r\n            <li>Conformal</li>\r\n            <li>Conformal and Distortion</li>\r\n         </ul>\r\n\r\n         <strong>7-parameter similarity:</strong> predominantly plate motion (~1.7 m NNE). It can be applied to 3-dimensional data, where horizontal coordinates are provided in latitudes and longitudes and the vertical values are ellipsoidal heights. AHD heights first need to be transformed to ellipsoidal heights using AUSGeoid2020. The 7-parameter similarity transformation is available for all locations within the GDA2020 extent (Australia, Cocos (Keeling) Islands, Christmas Island, Lord Howe Island, Norfolk Island and Macquarie Island and their maritime zones).\r\n         <br/>\r\n         <br/>\r\n\r\n         <strong>Conformal grid:</strong> predominantly plate tectonic motion (~1.7 m NNE) and replicates a 7-parameter similarity transformation. Heights are not transformed. Conformal grid transformations are only available for Australia and offshore areas.\r\n         <br/>\r\n         <i>NOTE: If GDA94 coordinates were observed using Global Navigation Satellite System (GNSS) technology, with corrections coming from a network of GNSS reference stations (such as GPSnet, CORSnet-NSW), it is likely that the coordinates will be unaffected by local distortions. In this case, the Conformal grid or a seven-parameter similarity transformation would be most suitable to transform the GDA94 coordinates to GDA2020.</i>\r\n         <br/>\r\n         <br/>\r\n         <strong>Conformal and Distortion grid:</strong> plate tectonic motion and regional distortion caused by an improved realisation of the global reference frame over time; irregular ground movement since GDA94 was established; and improvements in computation methods since GDA94. These effects vary in magnitude and direction around the country and can be as large as ~0.5 m. Heights are not transformed. Conformal and Distortion grid transformations are only available for Australia and offshore areas.\r\n         <br/>\r\n         <i>NOTE: If survey control marks were used for referencing and/or establishing GDA94 coordinates, localised distortion will need to be taken into account. In this case, the Conformal and Distortion grid should be used to transform to GDA2020 coordinates. If in doubt, contact your state or territory land survey authority.</i>\r\n         <br/>\r\n\r\n         For comprehensive information on GDA94 to GDA2020 transformation, please refer to the <a href=\"http://icsm.gov.au/datum/gda2020-and-gda94-technical-manuals\" target=\"_blank\">ICSM GDA2020 Technical Manual</a> or <a href=\"http://icsm.gov.au/datum/gda2020-fact-sheets\" target=\"_blank\">GDA2020 Fact Sheets</a>\r\n      </div>\r\n      <div class=\"col-md-5\" >\r\n         <upload-dialog state=\"root.state\" settings=\"root.data\"/>\r\n      </div>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/formats/formats.html","<div class=\"panel panel-default\">\r\n  <div class=\"panel-heading\"><h3 class=\"panel-title\">Allowed input file types</h3></div>\r\n  <div class=\"panel-body\">\r\n    <span class=\"label label-info input-format-pill\" ng-repeat=\"item in list\" title=\"{{item.description}} Extensions: {{item.extensions.join(\', \')}}\">\r\n       <a ng-href=\"{{item.url}}\" target=\"_blank\">{{item.name}}</a>\r\n    </span>\r\n  </div>\r\n</div>");
+$templateCache.put("positioning/filename/filename.html","<div class=\"input-group\">\r\n   <span class=\"input-group-addon\" id=\"nedf-filename\">Filename</span>\r\n   <input type=\"text\" ng-maxlength=\"30\" ng-trim=\"true\" ng-keypress=\"restrict($event)\"\r\n         ng-model=\"state.outputName\" class=\"form-control\"\r\n         placeholder=\"Filename\" aria-describedby=\"pos-filename\" />\r\n   <span class=\"input-group-addon\" id=\"basic-addon2\">.zip</span>\r\n</div>");
+$templateCache.put("positioning/output/output.html","<div class=\"row\">\r\n   <div class=\"col-md-3\">\r\n      <label for=\"geoprocessOutputFormat\">\r\n					Output Format<mandatory />\r\n				</label>\r\n   </div>\r\n   <div class=\"col-md-9\">\r\n      <select id=\"geoprocessOutputFormat\" style=\"width:95%\" ng-model=\"state.outFormat\" ng-options=\"opt.value for opt in settings.processing.outFormat\"></select>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/header/header.html","<div class=\"container-full common-header\" style=\"padding-right:10px; padding-left:10px\">\r\n    <div class=\"navbar-header\">\r\n\r\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".ga-header-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a href=\"/\" class=\"appTitle visible-xs\">\r\n            <h1 style=\"font-size:120%\">{{heading}}</h1>\r\n        </a>\r\n    </div>\r\n    <div class=\"navbar-collapse collapse ga-header-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li class=\"hidden-xs\"><a href=\"/\"><h1 class=\"applicationTitle\">{{heading}}</h1></a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right nav-icons\">\r\n        	<li common-navigation current=\"current\" role=\"menuitem\" style=\"padding-right:10px\"></li>\r\n			<li mars-version-display role=\"menuitem\"></li>\r\n			<li style=\"width:10px\"></li>\r\n        </ul>\r\n    </div><!--/.nav-collapse -->\r\n</div>\r\n\r\n<!-- Strap -->\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <div class=\"strap-blue\">\r\n        </div>\r\n        <div class=\"strap-white\">\r\n        </div>\r\n        <div class=\"strap-red\">\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("positioning/progress/progresscsv.html","<div class=\"row\">\r\n      <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n         <div class=\"progress\">\r\n            <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{state.percentage}}\"\r\n                     aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: {{state.percentage}}%;\">\r\n                <span class=\"sr-only\"></span>\r\n            </div>\r\n         </div>\r\n      </div>\r\n      <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Add information about your file.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-file-text-o fa-lg\" ng-class=\"{\'ed-valid\': state.validFileInfo, \'ed-invalid\': !state.validFileInfo}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Select a transformation.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-cogs fa-lg\" ng-class=\"{\'ed-valid\': state.transformation, \'ed-invalid\': !state.transformation}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Provide an email address.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-envelope fa-lg\" ng-class=\"{\'ed-valid\': state.validEmail, \'ed-invalid\': !state.validEmail}\"></i>\r\n         </span>\r\n      </div>\r\n      <div class=\"col-md-4\">\r\n         <button type=\"button\" class=\"btn btn-primary\" ng-click=\"cancel()\">Cancel</button>\r\n         <button class=\"btn btn-primary pull-right\" ng-disabled=\"!state.validForm\" ng-click=\"submit()\" disabled=\"disabled\">Submit</button>\r\n      </div>\r\n\r\n   </div>");
 $templateCache.put("positioning/progress/progresshapefile.html","<div class=\"row\">\r\n      <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n         <div class=\"progress\">\r\n            <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{state.percentage}}\"\r\n                     aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: {{state.percentage}}%;\">\r\n                <span class=\"sr-only\"></span>\r\n            </div>\r\n         </div>\r\n      </div>\r\n      <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Provide at least three files (dbf, shx and shp extensions) for reprojection\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-file-o fa-lg\" ng-class=\"{\'ed-valid\': state.full, \'ed-invalid\': !state.full}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Select a transformation.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-cogs fa-lg\" ng-class=\"{\'ed-valid\': state.transformation, \'ed-invalid\': !state.transformation}\"></i>\r\n         </span>\r\n         <span style=\"padding-right:10px\" uib-tooltip=\"Provide an email address.\" tooltip-placement=\"left\">\r\n            <i class=\"fa fa-envelope fa-lg\" ng-class=\"{\'ed-valid\': state.validEmail, \'ed-invalid\': !state.validEmail}\"></i>\r\n         </span>\r\n      </div>\r\n      <div class=\"col-md-4\">\r\n         <button type=\"button\" class=\"btn btn-primary\" ng-click=\"cancel()\">Cancel</button>\r\n         <button class=\"btn btn-primary pull-right\" ng-disabled=\"!state.validForm\" ng-click=\"submit()\" disabled=\"disabled\">Submit</button>\r\n      </div>\r\n   </div>");
 $templateCache.put("positioning/progress/progresssingle.html","<div class=\"row\">\r\n   <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n      <div class=\"progress\">\r\n         <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{state.percentage}}\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: {{state.percentage}}%;\">\r\n             <span class=\"sr-only\"></span>\r\n         </div>\r\n      </div>\r\n   </div>\r\n   <div class=\"col-md-4\" style=\"padding-top:7px\">\r\n      <span style=\"padding-right:10px\" uib-tooltip=\"Select a transformation.\" tooltip-placement=\"left\">\r\n         <i class=\"fa fa-cogs fa-lg\" ng-class=\"{\'ed-valid\': state.transformation, \'ed-invalid\': !state.transformation}\"></i>\r\n      </span>\r\n      <span style=\"padding-right:10px\" uib-tooltip=\"Confirm your data is in EPSG:4283 projection.\" tooltip-placement=\"left\">\r\n         <i class=\"fa fa-check-circle-o fa-lg\" ng-class=\"{\'ed-valid\': state.isEpsg4283, \'ed-invalid\': !state.isEpsg4283}\"></i>\r\n      </span>\r\n      <span style=\"padding-right:10px\" uib-tooltip=\"Provide an email address.\" tooltip-placement=\"left\">\r\n         <i class=\"fa fa-envelope fa-lg\" ng-class=\"{\'ed-valid\': state.validEmail, \'ed-invalid\': !state.validEmail}\"></i>\r\n      </span>\r\n   </div>\r\n   <div class=\"col-md-4\">\r\n      <button type=\"button\" class=\"btn btn-primary\" ng-click=\"cancel()\">Cancel</button>\r\n      <button class=\"btn btn-primary pull-right\" ng-disabled=\"!state.validForm\" ng-click=\"submit()\" disabled=\"disabled\">Submit</button>\r\n   </div>\r\n</div>");
-$templateCache.put("positioning/output/output.html","<div class=\"row\">\r\n   <div class=\"col-md-3\">\r\n      <label for=\"geoprocessOutputFormat\">\r\n					Output Format<mandatory />\r\n				</label>\r\n   </div>\r\n   <div class=\"col-md-9\">\r\n      <select id=\"geoprocessOutputFormat\" style=\"width:95%\" ng-model=\"state.outFormat\" ng-options=\"opt.value for opt in settings.processing.outFormat\"></select>\r\n   </div>\r\n</div>");
 $templateCache.put("positioning/shapefile/shapefile.html","<div>\r\n  <h4>Selected Shapefiles</h4>\r\n  <div ng-repeat=\"(key, file) in state.file\">\r\n		<div class=\"row\" ng-if=\"!file\">\r\n			<div class=\"col-md-12\">\r\n            <i class=\"fa fa-warning\" style=\"color:#f4c842\"></i>\r\n            Please drag and drop a file named {{state.outputName}}.{{key}} extension to complete your set for upload.\r\n			</div>\r\n		</div>\r\n      <div class=\"row\" ng-if=\"file\">\r\n			<div class=\"col-md-12\" ng-if=\"file\">\r\n            <i class=\"fa fa-check-square\" style=\"color:#328737\"></i>\r\n            {{file.name}} ({{file.size | bytes}})\r\n			</div>\r\n		</div>\r\n  </div>\r\n</div>");}]);
