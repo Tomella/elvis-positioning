@@ -57,6 +57,11 @@
       },
       transformation: [
          {
+            key: 'GDA94_to_GDA2020_7P',
+            value: 'Conformal Similarity 7-Parameter',
+            height: true
+         },
+         {
             key: 'GDA94_to_GDA2020_C',
             value: 'Conformal'
          },

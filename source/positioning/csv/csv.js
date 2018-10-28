@@ -52,6 +52,12 @@
                   messageService.error("Only CSV files with the first line containing column names are acceptable for transformation");
                   scope.state.clear();
                });
+
+               scope.allowsHeight = function() {
+                  let key = scope.state.transformation;
+                  return scope.settings.transformation.some(item =>
+                     item.key === key && item.height);
+               };
             }
          };
       }])

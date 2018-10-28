@@ -46,7 +46,8 @@ class State {
          result = result && this.latMinutesCol &&
             this.latSecondsCol &&
             this.lngMinutesCol &&
-            this.lngSecondsCol;
+            this.lngSecondsCol &&
+            (this.transformation !== "GDA94_to_GDA2020_7P" || this.heightCol);
       }
       return result;
    }
@@ -90,6 +91,11 @@ class State {
 
       if (this.isCsv) {
          parts += 2;
+         //
+         if(this.transformation && this.transformation === "GDA94_to_GDA2020_7P") {
+            parts++;
+            count += this.heightCol? 1 : 0;
+         }
 
          count += this.latDegreesCol ? 1 : 0
          count += this.lngDegreesCol ? 1 : 0

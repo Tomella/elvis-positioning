@@ -69,8 +69,11 @@
                      formData.lat_dd_fld = data.latDegreesCol;
                      formData.lng_dd_fld = data.lngDegreesCol;
                   }
-               }
 
+                  if(data.heightCol) {
+                     formData.z_fld = data.heightCol;
+                  }
+               }
                $http.post( config.transformUrl, formData, {
                   headers: {
                      "Content-Type": "application/json"

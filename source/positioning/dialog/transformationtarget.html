@@ -1,22 +1,25 @@
-<div class="row">
+<div class="row" style="margin-bottom:10px">
    <div class="col-md-12">
       <span style="font-weight:bold">
-         <span class="transform-verbose">Please choose a transformation grid:</span>
+         <span class="transform-verbose">Transformation grid:</span>
          <span class="transform-succinct">Transformation grid:</span>
          <mandatory />
       </span>
-      <span style="text-align: right" ng-if="transformations.length > 2">
+      <span style="text-align: right" ng-if="transformations.length > 3">
          <select id="transformation" ng-model="state.transformation">
             <option ng-selected="true" value=""></option>
             <option ng-repeat="option in transformations" value="{{option.key}}">{{option.value}}</option>
          </select>
       </span>
-      <span style="float: right" ng-if="transformations.length === 2">
+      <span style="float: right" ng-if="transformations.length === 3">
          <input type="radio" ng-model="state.transformation" ng-value="transformations[0].key" id="radio1">
          <label for="radio1">{{transformations[0].value}}</label>
          <span style="padding-right: 10px"></span>
          <input type="radio" ng-model="state.transformation" ng-value="transformations[1].key" id="radio2">
          <label for="radio2">{{transformations[1].value}}</label>
+         <span style="padding-right: 10px"></span>
+         <input type="radio" ng-model="state.transformation" ng-value="transformations[2].key" id="radio3">
+         <label for="radio3">{{transformations[2].value}}</label>
       </span>
    </div>
 </div>
