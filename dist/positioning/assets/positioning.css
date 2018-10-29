@@ -28,6 +28,45 @@
 .common-header {
   background-color: white;
 }
+.iso19115,
+.iso19115 ul,
+.iso19115 li {
+  position: relative;
+}
+
+.iso19115 ul {
+  list-style: none;
+  padding-left: 32px;
+}
+
+.iso19115 li::before,
+.iso19115 li::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+.iso19115 li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+.iso19115 li::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+.iso19115 ul > li:last-child::after {
+  height: 8px;
+}
+
+.iso19115-head {
+  font-weight: bold;
+}
 .mvt,
 .mvt ul,
 .mvt li {
@@ -184,45 +223,6 @@
   color: #fff;
   background-color: #777;
 }
-.iso19115,
-.iso19115 ul,
-.iso19115 li {
-  position: relative;
-}
-
-.iso19115 ul {
-  list-style: none;
-  padding-left: 32px;
-}
-
-.iso19115 li::before,
-.iso19115 li::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-}
-
-.iso19115 li::before {
-  border-top: 1px solid #000;
-  top: 9px;
-  width: 8px;
-  height: 0;
-}
-
-.iso19115 li::after {
-  border-left: 1px solid #000;
-  height: 100%;
-  width: 0px;
-  top: 2px;
-}
-
-.iso19115 ul > li:last-child::after {
-  height: 8px;
-}
-
-.iso19115-head {
-  font-weight: bold;
-}
 .icsmTabs {
   position: absolute;
   top: 0px;
@@ -378,6 +378,23 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
+.csv-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.csv-fix-label label {
+  width: 10em;
+  text-align: right;
+}
+
+@media screen and (max-width: 1350px) {
+  .csv-verbose {
+    display: none;
+  }
+}
 .upload-dialog p {
   padding: 15px;
   margin-top: 10px;
@@ -409,30 +426,6 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
-.csv-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.csv-fix-label label {
-  width: 10em;
-  text-align: right;
-}
-
-@media screen and (max-width: 1350px) {
-  .csv-verbose {
-    display: none;
-  }
-}
-.hide {
-  display: none;
-}
-
-.file-container {
-  margin-top: 0;
-}
 #fileDrop {
   font-weight: bold;
   font-size: 200%;
@@ -449,10 +442,12 @@ div.leaflet-control-scale-line {
   padding-right: 5px;
   margin: auto;
 }
-.input-format-pill {
-  font-size: 110%;
-  padding: 4px;
-  margin: 5px;
+.hide {
+  display: none;
+}
+
+.file-container {
+  margin-top: 0;
 }
 .nav-icons {
   margin-top: 7px !important;
@@ -483,6 +478,11 @@ div.leaflet-control-scale-line {
 
 .common-header {
   background-color: white;
+}
+.input-format-pill {
+  font-size: 110%;
+  padding: 4px;
+  margin: 5px;
 }
 .ed-valid {
   color: green;
