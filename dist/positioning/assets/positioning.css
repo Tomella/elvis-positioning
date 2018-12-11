@@ -378,6 +378,23 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
+.csv-label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.csv-fix-label label {
+  width: 10em;
+  text-align: right;
+}
+
+@media screen and (max-width: 1350px) {
+  .csv-verbose {
+    display: none;
+  }
+}
 .upload-dialog p {
   padding: 15px;
   margin-top: 10px;
@@ -406,23 +423,6 @@ div.leaflet-control-scale-line {
 
 @media screen and (min-width: 1350px) {
   .transform-succinct {
-    display: none;
-  }
-}
-.csv-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.csv-fix-label label {
-  width: 10em;
-  text-align: right;
-}
-
-@media screen and (max-width: 1350px) {
-  .csv-verbose {
     display: none;
   }
 }
@@ -457,6 +457,11 @@ a.brighter:hover {
   padding-right: 5px;
   margin: auto;
 }
+.input-format-pill {
+  font-size: 110%;
+  padding: 4px;
+  margin: 5px;
+}
 .nav-icons {
   margin-top: 7px !important;
 }
@@ -486,11 +491,6 @@ a.brighter:hover {
 
 .common-header {
   background-color: white;
-}
-.input-format-pill {
-  font-size: 110%;
-  padding: 4px;
-  margin: 5px;
 }
 .ed-valid {
   color: green;
