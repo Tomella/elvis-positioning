@@ -67,50 +67,6 @@
 .iso19115-head {
   font-weight: bold;
 }
-.mvt,
-.mvt ul,
-.mvt li {
-  position: relative;
-}
-
-.mvt ul {
-  list-style: none;
-  padding-left: 32px;
-}
-
-.mvt li::before,
-.mvt li::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-}
-
-.mvt li::before {
-  border-top: 1px solid #000;
-  top: 9px;
-  width: 8px;
-  height: 0;
-}
-
-.mvt li::after {
-  border-left: 1px solid #000;
-  height: 100%;
-  width: 0px;
-  top: 2px;
-}
-
-.mvt ul > li:last-child::after {
-  height: 8px;
-}
-
-.metaview-head {
-  font-weight: bold;
-}
-
-.metaview-info {
-  padding-left: 3px;
-  padding-right: 3px;
-}
 .altthemes-icon {
   background: url("../resources/img/dbl_sprites.svg") no-repeat;
   display: inline-block;
@@ -223,6 +179,50 @@
   color: #fff;
   background-color: #777;
 }
+.mvt,
+.mvt ul,
+.mvt li {
+  position: relative;
+}
+
+.mvt ul {
+  list-style: none;
+  padding-left: 32px;
+}
+
+.mvt li::before,
+.mvt li::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+.mvt li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+.mvt li::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+.mvt ul > li:last-child::after {
+  height: 8px;
+}
+
+.metaview-head {
+  font-weight: bold;
+}
+
+.metaview-info {
+  padding-left: 3px;
+  padding-right: 3px;
+}
 .icsmTabs {
   position: absolute;
   top: 0px;
@@ -309,29 +309,6 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-.main-body {
-  position: fixed;
-  top: 85px;
-  left: 0px;
-  right: 0px;
-  bottom: 8px;
-  overflow-y: auto;
-}
-
-.point-at-box {
-  transform: rotate(-35deg);
-}
-
-@media screen and (max-width: 990px) {
-  .point-at-box {
-    transform: rotate(135deg);
-  }
-}
-
-span.mandatory {
-  content: "*";
-  color: red;
-}
 .radCore {
   margin-right: 3px;
   display: inline-block;
@@ -377,6 +354,29 @@ div.leaflet-control-scale-line {
   div.leaflet-control-scale-line {
     display: none;
   }
+}
+.main-body {
+  position: fixed;
+  top: 85px;
+  left: 0px;
+  right: 0px;
+  bottom: 8px;
+  overflow-y: auto;
+}
+
+.point-at-box {
+  transform: rotate(-35deg);
+}
+
+@media screen and (max-width: 990px) {
+  .point-at-box {
+    transform: rotate(135deg);
+  }
+}
+
+span.mandatory {
+  content: "*";
+  color: red;
 }
 .csv-label {
   display: inline-block;
@@ -426,21 +426,6 @@ div.leaflet-control-scale-line {
     display: none;
   }
 }
-.hide {
-  display: none;
-}
-
-.file-container {
-  margin-top: 0;
-}
-
-a.brighter {
-  color: blue;
-}
-
-a.brighter:hover {
-  font-weight: bold;
-}
 #fileDrop {
   font-weight: bold;
   font-size: 200%;
@@ -456,6 +441,21 @@ a.brighter:hover {
   padding-left: 5px;
   padding-right: 5px;
   margin: auto;
+}
+.hide {
+  display: none;
+}
+
+.file-container {
+  margin-top: 0;
+}
+
+a.brighter {
+  color: blue;
+}
+
+a.brighter:hover {
+  font-weight: bold;
 }
 .input-format-pill {
   font-size: 110%;
