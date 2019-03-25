@@ -1,6 +1,6 @@
 class State {
    clear() {
-      this.extension = this.file = this.outputName = this.fileMap = this.type = this.files = this.isEpsg4283 = this.dmsType = null;
+      this.extension = this.file = this.outputName = this.fileMap = this.type = this.files = this.isProjection = this.dmsType = null;
    }
 
    get isCsv() {
@@ -40,7 +40,7 @@ class State {
    }
 
    get validCsvFileInfo() {
-      let result = this.latDegreesCol && this.lngDegreesCol && this.isEpsg4283;
+      let result = this.latDegreesCol && this.lngDegreesCol && this.isProjection;
 
       if (this.dmsType === "dms") {
          result = result && this.latMinutesCol &&
@@ -58,9 +58,9 @@ class State {
       return !!this.email;
    }
 
-   get acceptedEpsg4283() {
+   get acceptedProjection() {
       // We assume they only put in valid email addresses
-      return !!this.isEpsg4283;
+      return !!this.isProjection;
    }
 
    get validFilename() {
@@ -86,7 +86,7 @@ class State {
       let parts = 3;
 
       count += this.validEmail ? 1 : 0
-      count += this.acceptedEpsg4283 ? 1 : 0
+      count += this.acceptedProjection ? 1 : 0
       count += this.transformation ? 1 : 0
 
       if (this.isCsv) {

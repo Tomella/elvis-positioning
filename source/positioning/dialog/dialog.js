@@ -2,13 +2,13 @@
    angular.module("positioning.dialog",
          ["positioning.filename", "positioning.mandatory", "positioning.output", "positioning.progress", "positioning.email"])
 
-      .directive("acceptEpsg4283", [
+      .directive("acceptProjection", [
          function () {
             return {
                scope: {
                   state: "="
                },
-               templateUrl: "positioning/dialog/isepsg4283.html"
+               templateUrl: "positioning/dialog/isprojection.html"
             };
          }
       ])
@@ -76,5 +76,11 @@
                };
             }
          };
-      }]);
+      }])
+
+      .filter("projectionCode", function () {
+			return function (type) {
+				return type === "GDA94_to_GDA2020_7P" ? "EPSG::4939" : "EPSG::4283";
+			};
+		});
 }

@@ -65,7 +65,7 @@
          <h4>A few questions about your file named "{{state.file.name}}"</h4>
       </div>
       <transformation-target ng-if="state.extension !== 'csv'" state="state"></transformation-target>
-      <accept-epsg4283 state="state"></accept-epsg4283>
+      <accept-projection state="state"></accept-projection>
    </div>
    <div ng-show="state.file">
       <div>

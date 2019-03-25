@@ -1,0 +1,15 @@
+<div ng-show="state.transformation">
+   <div class="row">
+      <div class="col-md-6">
+         <label for="isProjection">
+					The data is in <a target="_blank" href="http://www.epsg-registry.org/">{{state.transformation|projectionCode}}</a> projection <mandatory />
+			</label>
+      </div>
+      <div class="col-md-6" style="text-align:right">
+         <button id="isProjection" type="button" title="The data must be in the {{state.transformation|projectionCode}} projection to be transformed correctly."
+               class="btn btn-default btn-xs" ng-click="state.isProjection = !state.isProjection">
+            <i class="fa" style="width:12px;height:12px;color:green" ng-class="{'fa-check':state.isProjection}" aria-hidden="true"></i>
+         </button>
+      </div>
+   </div>
+</div>

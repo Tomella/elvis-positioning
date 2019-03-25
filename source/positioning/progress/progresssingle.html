@@ -11,8 +11,8 @@
       <span style="padding-right:10px" uib-tooltip="Select a transformation." tooltip-placement="left">
          <i class="fa fa-cogs fa-lg" ng-class="{'ed-valid': state.transformation, 'ed-invalid': !state.transformation}"></i>
       </span>
-      <span style="padding-right:10px" uib-tooltip="Confirm your data is in EPSG:4283 projection." tooltip-placement="left">
-         <i class="fa fa-check-circle-o fa-lg" ng-class="{'ed-valid': state.isEpsg4283, 'ed-invalid': !state.isEpsg4283}"></i>
+      <span style="padding-right:10px" uib-tooltip="Confirm your data is in {{state.transformation|projectionCode}} projection." tooltip-placement="left">
+         <i class="fa fa-check-circle-o fa-lg" ng-class="{'ed-valid': state.isProjection, 'ed-invalid': !state.isProjection}"></i>
       </span>
       <span style="padding-right:10px" uib-tooltip="Provide an email address." tooltip-placement="left">
          <i class="fa fa-envelope fa-lg" ng-class="{'ed-valid': state.validEmail, 'ed-invalid': !state.validEmail}"></i>
