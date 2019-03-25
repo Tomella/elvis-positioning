@@ -1,6 +1,6 @@
 {
   "name": "positioning",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Positioning transformation from GDA94 to GDA2020",
   "keywords": [
     "elvis",
