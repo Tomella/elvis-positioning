@@ -653,6 +653,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+{
+   var ShpService = function ShpService($q) {
+      _classCallCheck(this, ShpService);
+
+      this.$q = $q;
+   };
+
+   ShpService.$invoke = ["$q"];
+
+   angular.module("positioning.shp", []).directive("shpFile", ["shpService", function (shpService) {
+      return {
+         templateUrl: "positioning/shapefile/shapefile.html",
+         restrict: 'AE',
+         scope: {
+            state: "=",
+            settings: "="
+         },
+         link: function link(scope) {}
+      };
+   }]).service("shpService", ShpService);
+}
+"use strict";
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -759,31 +784,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    SubmitService.$inject = ["$http", "$q", "configService"];
 
    angular.module("positioning.submit", []).service("submitService", SubmitService);
-}
-"use strict";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-{
-   var ShpService = function ShpService($q) {
-      _classCallCheck(this, ShpService);
-
-      this.$q = $q;
-   };
-
-   ShpService.$invoke = ["$q"];
-
-   angular.module("positioning.shp", []).directive("shpFile", ["shpService", function (shpService) {
-      return {
-         templateUrl: "positioning/shapefile/shapefile.html",
-         restrict: 'AE',
-         scope: {
-            state: "=",
-            settings: "="
-         },
-         link: function link(scope) {}
-      };
-   }]).service("shpService", ShpService);
 }
 "use strict";
 
