@@ -51,9 +51,7 @@
          }
       ],
       submit: {
-         uploadTemplate: "https://elvis2018-ga.fmecloud.com/fmerest/v2/resources/connections/FME_SHAREDRESOURCE_DATA/filesys/GDA2020/UPLOADS?createDirectories=false&overwrite=true&token={token}",
-         tokenUrl: 'token',
-         transformUrl: "https://elvis2018-ga.fmecloud.com/fmejobsubmitter/fsdf_positioning/GDA94to2020Manager.fmw?opt_showresult=false&opt_servicemode=sync"
+         uploadTemplate: "/positioning/upload",
       },
       transformation: [
          {

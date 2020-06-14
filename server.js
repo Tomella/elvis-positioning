@@ -1,3 +1,17 @@
+/**
+ * This server is only to be used in DEV on a desktop. The 
+ * real services are provided through the application server.
+ * 
+ * When the application is deployed on EC2 only the static
+ * content is deployed and the API gateway routes service 
+ * calls to the correct server.
+ * 
+ * At the time of writing this comment the services are 
+ * provided through fsdf-elvis so if you need change
+ * services change them there.
+ * 
+ */
+
 
 process.env.NO_PROXY = "localhost";
 
@@ -6,10 +20,6 @@ var express = require("express");
 var fs = require("fs");
 var os = require('os');
 var request = require('request');
-
-// For positioning. We need a token
-var Token = require("./lib/token");
-var token = new Token(config.fmeToken);
 
 //var httpProxy = require('http-proxy');
 var app = express();
@@ -63,6 +73,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+app.post('/positioning/upload', async (req, res, next) => {
+    
+    console.log(req);
+    
+    res.status(200).send("Goodo!");
+
+});
+
+
 app.all('/service/*', function (req, res, next) {
     var method, r;
 
@@ -99,24 +119,6 @@ app.all('/service/*', function (req, res, next) {
             return res.send("invalid method");
     }
     return req.pipe(r).pipe(res);
-});
-
-app.get('/refreshToken', function(req, res) {
-   token.refresh().then((data) => {
-      res.header({
-         "Content-Type": "application/json;charset=UTF-8"
-      });
-      res.status(200).send(data);
-   });
-});
-
-app.get('/token', function(req, res) {
-   token.value.then((data) => {
-      res.header({
-         "Content-Type": "application/json;charset=UTF-8"
-      });
-      res.status(200).send(data);
-   });
 });
 
 app.listen(port, function (err) {

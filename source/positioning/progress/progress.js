@@ -1,5 +1,5 @@
 {
-   angular.module("positioning.progress", ["positioning.submit"])
+   angular.module("positioning.progress", [])
 
       .directive("progressBarCsv", ["flashService", "messageService", "submitService", function (flashService, messageService, submitService) {
          return {

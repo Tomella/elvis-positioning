@@ -38,6 +38,8 @@
       'positioning.file',
       'positioning.filedrop',
       'positioning.header',
+      // 'positioning.submit',
+      'positioning.proxy',
       'positioning.templates',
 
       'ui.bootstrap',
