@@ -6,7 +6,7 @@ This document describes steps and resources required to deploy a new instance of
 
 ## Prerequisites
 
-Aso of this writing (16/12/2020) `elevation` and `positioning` applications/web sites use the same token mechanism and the `positioning` application/web site needs to be installed on the same instance with `elevation`. See [this](https://github.com/GeoscienceAustralia/fsdf-elvis/blob/master/documentation/alt_deployment.md) for the deployment of `elevation`.
+As of this writing (16/12/2020) `elevation` and `positioning` applications/web sites use the same token mechanism and the `positioning` application/web site needs to be installed on the same instance with `elevation`. See [this](https://github.com/GeoscienceAustralia/fsdf-elvis/blob/master/documentation/alt_deployment.md) for the deployment of `elevation`.
 
 ## Steps
 
