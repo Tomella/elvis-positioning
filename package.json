@@ -17,7 +17,7 @@
     "url": "https://github.com/Tomella/elvis-positioning"
   },
   "dependencies": {
-    "express": "^4.13.3",
+    "express": "^4.17.3",
     "express-http-proxy": "^0.9.1",
     "gulp-cli": "^2.2.0",
     "request": "^2.74.0",
